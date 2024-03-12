@@ -16,32 +16,6 @@ public class ConsoleUI {
         this.field = field;
     }
 
-    public void printField(){
-        System.out.println("|-----------------------------------------------------------------------------------------------------------------------|");
-        for (int Colnum = 1; Colnum <= field.getCollumnCount()+2; Colnum++){
-            System.out.print("   " + Colnum + "  ");
-        }
-        System.out.println();
-        for(int row = 0; row < field.board.length; row++){
-            System.out.println("+-----+-----+-----+-----+-----+-----+-----+");
-            for (int col = 0; col < field.board[row].length; col++){
-                System.out.print("|  ");
-                if (field.board[row][col].rank>0){
-                    System.out.print(field.board[row][col].pathNumber+ "  ");
-
-
-                }else{
-                    System.out.print("X  ");
-                }
-
-            }
-            int rowNum = row+1;
-            System.out.print("| " +rowNum );
-
-            System.out.println();
-        }
-        System.out.println("+-----+-----+-----+-----+-----+-----+-----+");
-    }
 
     public void processInput(){
         System.out.println("To remove path put 0");
@@ -63,7 +37,7 @@ public class ConsoleUI {
         }
     }
     public void play(){
-        printField();
+
         /*do{
             processInput();
             printField();
