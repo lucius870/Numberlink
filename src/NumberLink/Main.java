@@ -4,40 +4,46 @@ import NumberLink.consoleUI.ConsoleUI;
 import NumberLink.core.Field;
 
 import NumberLink.core.Grid;
+import NumberLink.core.LevelGenerator;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a Field object with 5 rows and 5 columns
+        String input;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("Enter the size of the board");
+            int n = scanner.nextInt();
 
-        Field field = new Field(5, 5);
-        var ui = new ConsoleUI(field);
-        Grid[][]board = new Grid[5][5];
+            Grid[][] board = new Grid[n][n];
+            LevelGenerator level = new LevelGenerator();
 
-        System.out.println("+++ Initializing board...\n");
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                board[i][j] = new Grid();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    board[i][j] = new Grid();
+                }
             }
-        }
+            Field field = new Field(board, n, n);
+            var ui = new ConsoleUI(field);
 
+            while (level.addPath(board, n)) ;
+            level.assignPathNumbers(board, n);
 
-        while (field.addPath(board,5));
+            ui.play(board, n);
+            if (field.isSolved(board)) {
+                System.out.println("If you want to play again press 'P', if not press 'L'");
+                Scanner scanner1 = new Scanner(System.in);
+                input = scanner1.nextLine();
+                if (input.equalsIgnoreCase("L")) {
+                    break;
+                }
+            }
+        } while (true);
 
-        System.out.println("\n+++ Assigning path numbers...\n");
-        field.assignPathNumbers(board, 5);
-
-        System.out.println("+++ The puzzle...\n");
-        field.printBoard(board, 5,false);
-
-        System.out.println("++The solution...\n");
-        field.printBoard(board,5,true);
-
-
-
-
-
+        System.out.println("CONGRATS YOU WON!!");
     }
 }
+
+
 
