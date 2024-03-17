@@ -1,22 +1,29 @@
-package NumberLink.core;
+package sk.tuke.gamestudio.game.NumberLink.core;
+
+import sk.tuke.gamestudio.entity.Score;
 
 import java.util.*;
 
 public class Field {
     public Grid[][] board;
+   // Score score;
 
 
     private GameState state = GameState.PLAYING;
+    //public int gamePoints = score.getPoints();
 
 
     private int rowCount;
     private int columnCount;
+
+    public int hints;
 
 
     public Field(Grid[][] board,int row, int col) {
         this.rowCount=row;
         this.columnCount = col;
         this.board = board;
+        this.hints = (row*col)/4;
 
     }
 
@@ -33,11 +40,13 @@ public class Field {
         return max;
     }
     public void markPath(Grid[][]board, int row, int col, int input) {
-            if (input == 0){
-                board[row-1][col-1].isEndpoint = false;
-            }else{
-                board[row-1][col-1].isEndpoint = true;
-            }
+        if (input == 0){
+            board[row-1][col-1].isEndpoint = false;
+            board[row-1][row-1].setState(GridState.OPEN);
+        }else{
+            board[row-1][col-1].isEndpoint = true;
+            board[row-1][row-1].setState(GridState.MARKED);
+        }
     }
 
     public boolean isSolved(Grid[][]board){
@@ -58,13 +67,21 @@ public class Field {
     public void makeHint(Grid[][]board){
         Random rand = new Random();
         int row,col;
-        do {
-            row = rand.nextInt(getRowCount());
-            col = rand.nextInt(getCollumnCount());
-        }while(board[row][col].isEndpoint == true ||board[row][col].pathNumber == 0 );
-        if (board[row][col].isEndpoint == false){
-            board[row][col].isEndpoint = true;
+        if (hints >=0) {
+            do {
+                row = rand.nextInt(getRowCount());
+                col = rand.nextInt(getCollumnCount());
+            } while (board[row][col].isEndpoint == true || board[row][col].pathNumber == 0);
+            if (board[row][col].isEndpoint == false) {
+                board[row][col].isEndpoint = true;
+                board[row][row].setState(GridState.HINTED);
+                hints--;
+            }
         }
+    }
+
+    public int getHints() {
+        return hints;
     }
 
     public int getRowCount() {

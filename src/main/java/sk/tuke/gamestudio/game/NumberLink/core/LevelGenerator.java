@@ -1,4 +1,4 @@
-package NumberLink.core;
+package sk.tuke.gamestudio.game.NumberLink.core;
 
 import java.util.Random;
 
@@ -83,6 +83,7 @@ public class LevelGenerator {
 
         setUnion(board[rowA][colA], board[rowB][colB]);
         board[rowA][colA].isEndpoint = true;
+        board[rowA][rowB].setState(GridState.MARKED);
 
         // Extend the path
         while (true) {
@@ -112,6 +113,7 @@ public class LevelGenerator {
         }
 
         board[rowB][colB].isEndpoint = true;
+        board[rowA][rowB].setState(GridState.MARKED);
         System.out.println();
         return true;
     }

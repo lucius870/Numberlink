@@ -1,4 +1,4 @@
-package NumberLink.core;
+package sk.tuke.gamestudio.game.NumberLink.core;
 
 public  class Grid {
 

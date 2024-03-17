@@ -1,10 +1,10 @@
-package NumberLink;
+package sk.tuke.gamestudio.game.NumberLink;
 
-import NumberLink.consoleUI.ConsoleUI;
-import NumberLink.core.Field;
 
-import NumberLink.core.Grid;
-import NumberLink.core.LevelGenerator;
+import sk.tuke.gamestudio.game.NumberLink.consoleUI.ConsoleUI;
+import sk.tuke.gamestudio.game.NumberLink.core.Field;
+import sk.tuke.gamestudio.game.NumberLink.core.Grid;
+import sk.tuke.gamestudio.game.NumberLink.core.LevelGenerator;
 
 import java.util.Scanner;
 
@@ -32,6 +32,7 @@ public class Main {
 
             ui.play(board, n);
             if (field.isSolved(board)) {
+                System.out.println("CONGRATS YOU WON!!");
                 System.out.println("If you want to play again press 'P', if not press 'L'");
                 Scanner scanner1 = new Scanner(System.in);
                 input = scanner1.nextLine();
@@ -41,9 +42,6 @@ public class Main {
             }
         } while (true);
 
-        System.out.println("CONGRATS YOU WON!!");
+
     }
 }
-
-
-
