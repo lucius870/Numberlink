@@ -2,6 +2,7 @@ package sk.tuke.gamestudio.service;
 
 import sk.tuke.gamestudio.entity.Score;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ public class ScoreServiceJDBC implements ScoreService {
     public static final String SELECT = "SELECT game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
     public static final String DELETE = "DELETE FROM score";
     public static final String INSERT = "INSERT INTO score (game, player, points, playedOn) VALUES (?, ?, ?, ?)";
+
+
 
     @Override
     public void addScore(Score score) {
@@ -39,6 +42,7 @@ public class ScoreServiceJDBC implements ScoreService {
             try (ResultSet rs = statement.executeQuery()) {
                 List<Score> scores = new ArrayList<>();
                 while (rs.next()) {
+
                     scores.add(new Score(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTimestamp(4)));
                 }
                 return scores;

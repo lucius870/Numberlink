@@ -53,7 +53,7 @@ public class Field {
         for (int row = 0; row < getRowCount(); row++) {
             for (int col = 0; col < getCollumnCount(); col++) {
                 if (board[row][col].pathNumber == 0) {
-                    break;
+                    continue;
                 }
                 if (board[row][col].isEndpoint == false) {
                     return false;
@@ -102,6 +102,21 @@ public class Field {
 
     public GameState getState() {
         return state;
+    }
+
+    public int getScore(){
+        int score = 0;
+        for (int row = 0; row < getRowCount(); row++){
+            for (int col = 0; col < getCollumnCount(); col++){
+                if (board[row][col].getState() == GridState.MARKED){
+                    score += 10;
+                }
+                if (board[row][col].getState() == GridState.HINTED){
+                    score -= 5;
+                }
+            }
+        }
+        return score;
     }
 
 

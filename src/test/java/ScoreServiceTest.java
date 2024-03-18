@@ -1,0 +1,71 @@
+import org.junit.jupiter.api.Test;
+import sk.tuke.gamestudio.entity.Score;
+import sk.tuke.gamestudio.service.ScoreService;
+import sk.tuke.gamestudio.service.ScoreServiceJDBC;
+
+
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ScoreServiceTest {
+
+    public ScoreService scoreService = new ScoreServiceJDBC();
+
+
+    @Test
+    public void reset(){
+        scoreService.reset();
+        assertEquals(0,scoreService.getTopScores("numberlink").size());
+
+    }
+    @Test
+    public void addScore() {
+        scoreService.reset();
+        var date = new Date();
+
+        scoreService.addScore(new Score("numberlink", "Jaro", 100, date));
+
+        var scores = scoreService.getTopScores("numberlink");
+        assertEquals(1, scores.size());
+        assertEquals("numberlink", scores.get(0).getGame());
+        assertEquals("Jaro", scores.get(0).getPlayer());
+        assertEquals(100, scores.get(0).getPoints());
+        assertEquals(date, scores.get(0).getPlayedOn());
+    }
+
+    @Test
+    public void getTopScores() {
+        scoreService.reset();
+        var date = new Date();
+        scoreService.addScore(new Score("numberlink", "Lucia", 100, date));
+        scoreService.addScore(new Score("numberlink", "Mima", 150, date));
+        scoreService.addScore(new Score("numberlink", "Alfred", 120, date));
+        scoreService.addScore(new Score("numberlink", "Alfonz", 180, date));
+
+        var scores = scoreService.getTopScores("numberlink");
+
+        assertEquals(4, scores.size());
+
+        assertEquals("numberlink", scores.get(1).getGame());
+        assertEquals("Mima", scores.get(1).getPlayer());
+        assertEquals(150, scores.get(1).getPoints());
+        assertEquals(date, scores.get(1).getPlayedOn());
+
+        assertEquals("numberlink", scores.get(0).getGame());
+        assertEquals("Alfonz", scores.get(0).getPlayer());
+        assertEquals(180, scores.get(0).getPoints());
+        assertEquals(date, scores.get(0).getPlayedOn());
+
+        assertEquals("numberlink", scores.get(2).getGame());
+        assertEquals("Alfred", scores.get(2).getPlayer());
+        assertEquals(120, scores.get(2).getPoints());
+        assertEquals(date, scores.get(2).getPlayedOn());
+
+        assertEquals("numberlink", scores.get(3).getGame());
+        assertEquals("Lucia", scores.get(3).getPlayer());
+        assertEquals(100, scores.get(3).getPoints());
+        assertEquals(date, scores.get(3).getPlayedOn());
+    }
+
+}

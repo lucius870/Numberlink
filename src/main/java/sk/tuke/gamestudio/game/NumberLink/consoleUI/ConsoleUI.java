@@ -1,15 +1,24 @@
 package sk.tuke.gamestudio.game.NumberLink.consoleUI;
 
 
+import sk.tuke.gamestudio.entity.Rating;
+import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.game.NumberLink.core.Field;
 import sk.tuke.gamestudio.game.NumberLink.core.GameState;
 import sk.tuke.gamestudio.game.NumberLink.core.Grid;
+import sk.tuke.gamestudio.service.RatingService;
+import sk.tuke.gamestudio.service.RatingServiceJDBC;
+import sk.tuke.gamestudio.service.ScoreService;
+import sk.tuke.gamestudio.service.ScoreServiceJDBC;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleUI {
     private Field field;
     private final Scanner scanner = new Scanner(System.in);
+    private ScoreService scoreService = new ScoreServiceJDBC();
+    private RatingService ratingService = new RatingServiceJDBC();
     public String RESET = "\u001B[0m";
 
     public String[] colorSet = {"\u001b[38;5;33m",
@@ -118,13 +127,12 @@ public class ConsoleUI {
 
     public void processInput(Grid[][] board, int n, int maxNumber) {
         System.out.println();
-        System.out.println("You have "+ field.getHints()+ " hints left");
-
         do {
             System.out.print("Enter number you want to connect (or 'H' for hint): ");
             String input = scanner.next();
-            if (field.getHints() >=0){
-                System.out.println("You have " + field.getHints()+ " hints left");
+            if (field.getHints() >0){
+                System.out.printf("You have %d hints left",field.getHints()-1);
+                System.out.println();
                 if (input.equalsIgnoreCase("H")) {
                     field.makeHint(board);
                     field.isSolved(board);
@@ -146,7 +154,7 @@ public class ConsoleUI {
                 System.out.print("Enter column where to connect: ");
                 int cols = scanner.nextInt();
 
-                if (line > maxNumber || line < -1 || rows - 1 > field.getRowCount() + 1 || cols - 1 < 0 || cols - 1 > field.getCollumnCount() + 1) {
+                if (line > maxNumber || line < -1 || rows  > field.getRowCount()  || cols - 1 < 0 || cols  > field.getCollumnCount() ) {
                     System.out.println("Wrong input must try again!!");
                 } else {
                     if (board[rows - 1][cols - 1].pathNumber == line || line == 0) {
@@ -172,11 +180,47 @@ public class ConsoleUI {
         System.out.println("Enjoy the game !");
         System.out.println("+++ The puzzle...\n");
         printBoard(board,n);
+
         do{
             processInput(board,n,maxNumber);
             printBoard(board,n);
         }
         while (!field.isSolved(board));
+        saveScore();
+        printScores();
 
     }
+
+    public void printScores(){
+        var scores = scoreService.getTopScores("numberlink");
+        System.out.println("+---------------------------------------------------------------+");
+        for (int i = 0; i < scores.size(); i++){
+            var score = scores.get(i);
+            System.out.printf("%d. %s %d\n", i + 1, score.getPlayer(), score.getPoints());
+        }
+        System.out.println("+---------------------------------------------------------------+");
+    }
+    private void saveScore() {
+        scoreService.addScore(
+                new Score(System.getProperty("user.name"), "numberlink", field.getScore(), new Date()));
+    }
+    public void saveRating(){
+        System.out.println("Enter what do you think about this game: ");
+        Scanner scannerRating = new Scanner(System.in);
+        System.out.println("Enter rating (number)");
+        var ratings = scannerRating.nextInt();
+        ratingService.setRating(
+                new Rating("numberlink",System.getProperty("user.name"),ratings,new Date())
+        );
+
+
+    }
+    public void printRating(){
+        var rating = ratingService.getRating("numberlink",System.getProperty("user.name"));
+        System.out.println("+---------------------------------------------------------------+");
+        System.out.println("The rating for this game is : " + rating);
+        System.out.println("+---------------------------------------------------------------+");
+
+    }
+
 }
