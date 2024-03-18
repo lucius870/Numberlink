@@ -114,7 +114,6 @@ public class LevelGenerator {
 
         board[rowB][colB].isEndpoint = true;
         board[rowA][rowB].setState(GridState.MARKED);
-        System.out.println();
         return true;
     }
 

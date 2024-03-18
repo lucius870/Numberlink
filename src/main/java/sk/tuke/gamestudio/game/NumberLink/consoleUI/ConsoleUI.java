@@ -1,15 +1,13 @@
 package sk.tuke.gamestudio.game.NumberLink.consoleUI;
 
 
+import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Rating;
 import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.game.NumberLink.core.Field;
 import sk.tuke.gamestudio.game.NumberLink.core.GameState;
 import sk.tuke.gamestudio.game.NumberLink.core.Grid;
-import sk.tuke.gamestudio.service.RatingService;
-import sk.tuke.gamestudio.service.RatingServiceJDBC;
-import sk.tuke.gamestudio.service.ScoreService;
-import sk.tuke.gamestudio.service.ScoreServiceJDBC;
+import sk.tuke.gamestudio.service.*;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -19,6 +17,7 @@ public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in);
     private ScoreService scoreService = new ScoreServiceJDBC();
     private RatingService ratingService = new RatingServiceJDBC();
+    private CommentService commentService = new CommentServiceJDBC();
     public String RESET = "\u001B[0m";
 
     public String[] colorSet = {"\u001b[38;5;33m",
@@ -186,13 +185,12 @@ public class ConsoleUI {
             printBoard(board,n);
         }
         while (!field.isSolved(board));
-        saveScore();
-        printScores();
 
     }
 
     public void printScores(){
         var scores = scoreService.getTopScores("numberlink");
+        System.out.println("Top Players: ");
         System.out.println("+---------------------------------------------------------------+");
         for (int i = 0; i < scores.size(); i++){
             var score = scores.get(i);
@@ -200,10 +198,30 @@ public class ConsoleUI {
         }
         System.out.println("+---------------------------------------------------------------+");
     }
-    private void saveScore() {
+    public void saveScore() {
         scoreService.addScore(
-                new Score(System.getProperty("user.name"), "numberlink", field.getScore(), new Date()));
+                new Score( "numberlink",System.getProperty("user.name"), field.getScore(), new Date()));
     }
+    public void saveComment(String input){
+        commentService.addComment(
+                new Comment("numberlink",System.getProperty("user.name"),input, new Date())
+        );
+
+    }
+    public void printComment(){
+        var comments = commentService.getComments("numberlink");
+        System.out.println("Comments how to improve game");
+        System.out.println("+---------------------------------------------------------------+");
+
+        for (int i = 0; i < comments.size(); i++){
+            var comment = comments.get(i);
+            System.out.printf("%d. %s %s\n", i + 1, comment.getPlayer(), comment.getComment());
+        }
+        System.out.println("+---------------------------------------------------------------+");
+
+    }
+
+    /*
     public void saveRating(){
         System.out.println("Enter what do you think about this game: ");
         Scanner scannerRating = new Scanner(System.in);
@@ -221,6 +239,6 @@ public class ConsoleUI {
         System.out.println("The rating for this game is : " + rating);
         System.out.println("+---------------------------------------------------------------+");
 
-    }
+    }*/
 
 }

@@ -32,10 +32,10 @@ public class CommentServiceTest {
 
         commentService.reset();
         var date = new Date();
-        commentService.addComment(new Comment("numberlink", "Lucia","very good", date));
-        commentService.addComment(new Comment("numberlink", "Mimus","great", date));
-        commentService.addComment(new Comment("numberlink", "Alfonz","baddd", date));
-        commentService.addComment(new Comment("numberlink", "Alfred","average", date));
+        commentService.addComment(new Comment("numberlink", "Lucia","better prints", date));
+        commentService.addComment(new Comment("numberlink", "Mimus","do it like an app", date));
+        commentService.addComment(new Comment("numberlink", "Alfonz","nothing to improve", date));
+        commentService.addComment(new Comment("numberlink", "Alfred","add connecting with mouse", date));
 
         var comments = commentService.getComments("numberlink");
 
@@ -43,22 +43,22 @@ public class CommentServiceTest {
 
         assertEquals("numberlink",comments.get(0).getGame());
         assertEquals("Lucia", comments.get(0).getPlayer());
-        assertEquals("very good",comments.get(0).getComment());
+        assertEquals("better prints",comments.get(0).getComment());
         assertEquals(date, comments.get(0).getCommentedOn());
 
         assertEquals("numberlink",comments.get(1).getGame());
         assertEquals("Mimus", comments.get(1).getPlayer());
-        assertEquals("great",comments.get(1).getComment());
+        assertEquals("do it like an app",comments.get(1).getComment());
         assertEquals(date, comments.get(1).getCommentedOn());
 
         assertEquals("numberlink",comments.get(2).getGame());
         assertEquals("Alfonz", comments.get(2).getPlayer());
-        assertEquals("baddd",comments.get(2).getComment());
+        assertEquals("nothing to improve",comments.get(2).getComment());
         assertEquals(date, comments.get(2).getCommentedOn());
 
         assertEquals("numberlink",comments.get(3).getGame());
         assertEquals("Alfred", comments.get(3).getPlayer());
-        assertEquals("average",comments.get(3).getComment());
+        assertEquals("add connecting with mouse",comments.get(3).getComment());
         assertEquals(date, comments.get(3).getCommentedOn());
 
     }

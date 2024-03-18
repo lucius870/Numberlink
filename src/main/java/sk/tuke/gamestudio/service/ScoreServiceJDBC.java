@@ -9,57 +9,63 @@ import java.util.List;
 
 
 public class ScoreServiceJDBC implements ScoreService {
-    public static final String URL = "jdbc:postgresql://localhost/gamestudio";
-    public static final String USER = "postgres";
-    public static final String PASSWORD = "postgres";
-    public static final String SELECT = "SELECT game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
-    public static final String DELETE = "DELETE FROM score";
-    public static final String INSERT = "INSERT INTO score (game, player, points, playedOn) VALUES (?, ?, ?, ?)";
+    private static final String URL = "jdbc:postgresql://localhost/gamestudio";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "postgres";
 
+    public static final String INSERT_COMMAND = "INSERT INTO score (game,player, points, playedOn) VALUES (?, ?, ?, ?)";
 
+    public static final String DELETE_COMMAND = "DELETE FROM score";
+
+    public static final String SELECT_COMMAND = "SELECT  game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 5";
 
     @Override
     public void addScore(Score score) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(INSERT)
-        ) {
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.prepareStatement(INSERT_COMMAND)) {
+
             statement.setString(1, score.getGame());
             statement.setString(2, score.getPlayer());
             statement.setInt(3, score.getPoints());
             statement.setTimestamp(4, new Timestamp(score.getPlayedOn().getTime()));
+
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new ScoreException("Problem inserting score", e);
+            throw new ScoreException("Problem adding scores",e);
         }
     }
 
     @Override
     public List<Score> getTopScores(String game) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(SELECT);
-        ) {
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.prepareStatement(SELECT_COMMAND)) {
             statement.setString(1, game);
-            try (ResultSet rs = statement.executeQuery()) {
-                List<Score> scores = new ArrayList<>();
-                while (rs.next()) {
+            try (var rs = statement.executeQuery()) {
+                var scores = new ArrayList<Score>();
 
-                    scores.add(new Score(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTimestamp(4)));
+                while (rs.next()) {
+                    scores.add(new Score(
+                            rs.getString(1),
+                            rs.getString(2),
+                            rs.getInt(3),
+                            rs.getTimestamp(4)));
                 }
+
                 return scores;
             }
         } catch (SQLException e) {
-            throw new ScoreException("Problem selecting score", e);
+            throw new ScoreException("Problem getting scores",e);
         }
     }
 
     @Override
     public void reset() {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
-        ) {
-            statement.executeUpdate(DELETE);
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.createStatement()) {
+            statement.executeUpdate(DELETE_COMMAND);
         } catch (SQLException e) {
-            throw new ScoreException("Problem deleting score", e);
+            throw new ScoreException("Problem deleting scores",e);
         }
     }
 }
+

@@ -16,13 +16,14 @@ public class CommentServiceJDBC implements CommentService{
     public static final String INSERT = "INSERT INTO comment (game, player, comment, commentedOn) VALUES (?, ?, ?, ?)";
     @Override
     public void addComment(Comment comment) throws CommentException {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(INSERT)
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.prepareStatement(INSERT)
         ) {
             statement.setString(1,comment.getGame());
             statement.setString(2,comment.getPlayer());
             statement.setString(3,comment.getComment());
             statement.setTimestamp(4,new Timestamp(comment.getCommentedOn().getTime()));
+
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new CommentException("Problem inserting comment", e);
@@ -32,14 +33,19 @@ public class CommentServiceJDBC implements CommentService{
 
     @Override
     public List<Comment> getComments(String game) throws CommentException {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(SELECT)
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.prepareStatement(SELECT)
         ) {
             statement.setString(1,game);
-            try (ResultSet rc = statement.executeQuery()){
-                List<Comment> comments = new ArrayList<>();
+            try (var rc = statement.executeQuery()){
+                var comments = new ArrayList<Comment>();
                 while (rc.next()){
-                    comments.add(new Comment(rc.getString(1), rc.getString(2),rc.getString(3),rc.getTimestamp(4) ));
+                    comments.add(new Comment(
+                            rc.getString(1),
+                            rc.getString(2),
+                            rc.getString(3),
+                            rc.getTimestamp(4)));
+
                 }
                 return comments;
             }
@@ -51,8 +57,8 @@ public class CommentServiceJDBC implements CommentService{
 
     @Override
     public void reset() throws CommentException {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
+        try (var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             var statement = connection.createStatement()
         ) {
             statement.executeUpdate(DELETE);
         } catch (SQLException e) {

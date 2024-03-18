@@ -42,8 +42,14 @@ public class Main {
                 Scanner scanner1 = new Scanner(System.in);
                 input = scanner1.nextLine();
                 if (input.equalsIgnoreCase("L")) {
-                    ui.saveRating();
-                    ui.printRating();
+                    ui.saveScore();
+                    ui.printScores();
+                    System.out.println("Please leave a comment how to improve the game: ");
+                    input = scanner1.nextLine();
+                    ui.saveComment(input);
+                    ui.printComment();
+                   /* ui.saveRating();
+                    ui.printRating();*/
                     break;
                 }
             }
