@@ -14,21 +14,21 @@ public class RatingServiceTest {
     @Test
     public void reset(){
         ratingService.reset();
-        assertEquals(0,ratingService.getRating("numberlink","Lucia"));
+        assertEquals(0,ratingService.getAverageRating("numberlink"));
     }
 
     @Test
     public void setRating(){
         ratingService.reset();
         var date = new Date();
-        Rating rating = new Rating("numberlink", "Lucia",2,date);
+        Rating rating = new Rating("numberlink", "Lucia", 2, date);
         ratingService.setRating(rating);
-        var gotRating = ratingService.getRating("numberlink", "Lucia");
-        assertEquals(2,gotRating);
+        int gotRating = ratingService.getRating("numberlink", "Lucia");
+        assertEquals(2, gotRating);
         assertEquals("numberlink", rating.getGame());
         assertEquals("Lucia", rating.getPlayer());
-        assertEquals(2,rating.getRating());
-        assertEquals(date,rating.getRatedOn());
+        assertEquals(2, rating.getRating());
+        assertEquals(date, rating.getRatedOn());
 
     }
 
@@ -56,10 +56,10 @@ public class RatingServiceTest {
         ratingService.setRating(new Rating("numberlink","Mimus",1,date));
         ratingService.setRating(new Rating("numberlink","Alfred",1,date));
         ratingService.setRating(new Rating("numberlink","Alfonz",4,date));
-        assertEquals(2,ratingService.getAverageRating("numerlink"));
+        assertEquals(2,ratingService.getAverageRating("numberlink"));
         ratingService.setRating(new Rating("numberlink","Alzbeta",5,date));
         ratingService.setRating(new Rating("numberlink","Natalia",5,date));
-        assertEquals(3,ratingService.getAverageRating("numerlink"));
+        assertEquals(3,ratingService.getAverageRating("numberlink"));
 
 
     }

@@ -18,6 +18,8 @@ public class Main {
         String input;
         Scanner scanner = new Scanner(System.in);
         do {
+            System.out.println("Please first enter your name");
+            var name = scanner.nextLine();
             System.out.println("Enter the size of the board");
             int n = scanner.nextInt();
 
@@ -41,15 +43,15 @@ public class Main {
                 System.out.println("If you want to play again press 'P', if not press 'L'");
                 Scanner scanner1 = new Scanner(System.in);
                 input = scanner1.nextLine();
+                ui.saveScore(name);
                 if (input.equalsIgnoreCase("L")) {
-                    ui.saveScore();
                     ui.printScores();
                     System.out.println("Please leave a comment how to improve the game: ");
                     input = scanner1.nextLine();
-                    ui.saveComment(input);
+                    ui.saveComment(name,input);
                     ui.printComment();
-                   /* ui.saveRating();
-                    ui.printRating();*/
+                    ui.saveRating(name);
+                    ui.printRating(name);
                     break;
                 }
             }

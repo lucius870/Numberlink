@@ -198,13 +198,13 @@ public class ConsoleUI {
         }
         System.out.println("+---------------------------------------------------------------+");
     }
-    public void saveScore() {
+    public void saveScore(String name) {
         scoreService.addScore(
-                new Score( "numberlink",System.getProperty("user.name"), field.getScore(), new Date()));
+                new Score( "numberlink",name, field.getScore(), new Date()));
     }
-    public void saveComment(String input){
+    public void saveComment(String name, String input){
         commentService.addComment(
-                new Comment("numberlink",System.getProperty("user.name"),input, new Date())
+                new Comment("numberlink",name,input, new Date())
         );
 
     }
@@ -221,24 +221,26 @@ public class ConsoleUI {
 
     }
 
-    /*
-    public void saveRating(){
+    public void saveRating(String name){
         System.out.println("Enter what do you think about this game: ");
         Scanner scannerRating = new Scanner(System.in);
         System.out.println("Enter rating (number)");
         var ratings = scannerRating.nextInt();
         ratingService.setRating(
-                new Rating("numberlink",System.getProperty("user.name"),ratings,new Date())
+                new Rating("numberlink",name,ratings,new Date())
         );
+    }
+    public void printRating(String name){
+        var rating = ratingService.getRating("numberlink",name);
+        System.out.println("+---------------------------------------------------------------+");
+        System.out.println("Rating from "+name+" is: " + rating);
+        System.out.println("+---------------------------------------------------------------+");
+        var Avgrating = ratingService.getAverageRating("numberlink");
+        System.out.println("+---------------------------------------------------------------+");
+        System.out.println("The average rating for this game is : " + Avgrating);
+        System.out.println("+---------------------------------------------------------------+");
 
 
     }
-    public void printRating(){
-        var rating = ratingService.getRating("numberlink",System.getProperty("user.name"));
-        System.out.println("+---------------------------------------------------------------+");
-        System.out.println("The rating for this game is : " + rating);
-        System.out.println("+---------------------------------------------------------------+");
-
-    }*/
 
 }
