@@ -14,6 +14,9 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     private Field field;
+    private int rows;
+    private int cols;
+    private int line;
     private final Scanner scanner = new Scanner(System.in);
     private ScoreService scoreService = new ScoreServiceJDBC();
     private RatingService ratingService = new RatingServiceJDBC();
@@ -59,34 +62,24 @@ public class ConsoleUI {
 
         this.field = field;
     }
-
-    public void printBoard(Grid[][] board, int n ) {
-        int startNum = 0;
-        for (int Colnum = 1; Colnum <= field.getCollumnCount(); Colnum++){
-            if (Colnum < 10){
+    public void printHeader() {
+        for (int Colnum = 1; Colnum <= field.getCollumnCount(); Colnum++) {
+            if (Colnum < 10) {
                 System.out.print("    " + Colnum + "   ");
-            }
-            else{
+            } else {
                 System.out.print("   " + Colnum + "   ");
             }
-
         }
         System.out.println();
-        for (Grid[] row : board) {
-            for (Grid cell : row) {
-                if (cell.pathNumber != 0&& cell.isEndpoint) {
-                    if (startNum == 0) {
-                        startNum = cell.pathNumber;
-                    }
-                }
-            }
-        }
+    }
+
+    public void printBoard(Grid[][] board, int n ) {
+        printHeader();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print("+-------");
             }
             System.out.println("+");
-
             for (int j = 0; j < n; j++) {
                 Grid cell = board[i][j];
                 if (cell.pathNumber == 0) {
@@ -118,49 +111,57 @@ public class ConsoleUI {
             else{
                 System.out.printf("|%s  %d   %s", colorSet[number], number, RESET);
             }
-        } else {
-            System.out.print("|       ");
         }
     }
 
-
     public void processInput(Grid[][] board, int n, int maxNumber) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println();
         do {
-            System.out.print("Enter number you want to connect (or 'H' for hint): ");
-            String input = scanner.next();
-            if (field.getHints() >0){
-                System.out.printf("You have %d hints left",field.getHints()-1);
-                System.out.println();
-                if (input.equalsIgnoreCase("H")) {
-                    field.makeHint(board);
-                    field.isSolved(board);
-                    if (field.getState() == GameState.SOLVED){
-                        break;
-                    }
-                    printBoard(board,n);
-                    continue;
-                }
-            }
-            else {
-                System.out.println("Sorry you ran out of hints.");
-            }
-
             try {
-                int line = Integer.parseInt(input);
-                System.out.print("Enter row where to connect: ");
-                int rows = scanner.nextInt();
-                System.out.print("Enter column where to connect: ");
-                int cols = scanner.nextInt();
+                System.out.println("Enter number you want to connect (or 'H' for hint) and where to connect: ");
+                String input = scanner.nextLine();
 
-                if (line > maxNumber || line < -1 || rows  > field.getRowCount()  || cols - 1 < 0 || cols  > field.getCollumnCount() ) {
-                    System.out.println("Wrong input must try again!!");
-                } else {
-                    if (board[rows - 1][cols - 1].pathNumber == line || line == 0) {
-                        field.markPath(board, rows, cols, line);
-                        break;
+                if (input.equalsIgnoreCase("H")) {
+                    if (field.getHints() > 0) {
+                        System.out.println();
+                        System.out.printf("You have %d hints left\n", field.getHints() - 1);
+                        field.makeHint(board);
+                        field.isSolved(board);
+                        if (field.getState() == GameState.SOLVED) {
+                            break;
+                        }
+                        printBoard(board, n);
                     } else {
-                        System.out.println("Upsss! That number doesn't belong there");
+                        System.out.println("Sorry you ran out of hints.");
+                        System.out.println();
+                    }
+                } else if (input.equalsIgnoreCase("E")) {
+                   System.exit(0);
+                } else {
+                    if (input.length() <= 9) {
+                        int nPos = input.indexOf('n') != -1 ? input.indexOf('n') : input.indexOf('N');
+                        int rPos = input.indexOf('r') != -1 ? input.indexOf('r') : input.indexOf('R');
+                        int cPos = input.indexOf('c') != -1 ? input.indexOf('c') : input.indexOf('C');
+
+                        if (nPos == -1 || rPos == -1 || cPos == -1) {
+                            System.out.println("Wrong input length!!");
+                            System.out.println();
+                            continue;
+                        }
+                        line = Integer.parseInt(input.substring(nPos + 1, rPos));
+                        rows = Integer.parseInt(input.substring(rPos + 1, cPos));
+                        cols = Integer.parseInt(input.substring(cPos + 1));
+                    }
+                    if (line > maxNumber || line < -1 || rows > field.getRowCount() || cols < 1 || cols > field.getCollumnCount()) {
+                        System.out.println("Input out of bounds!!");
+                    } else {
+                        if (board[rows - 1][cols - 1].pathNumber == line || line == 0) {
+                            field.markPath(board, rows, cols, line);
+                            break;
+                        } else {
+                            System.out.println("Upsss! That number doesn't belong there");
+                        }
                     }
                 }
             } catch (NumberFormatException e) {
@@ -170,13 +171,27 @@ public class ConsoleUI {
     }
     public void play(Grid[][] board,int n){
         int maxNumber = field.getMaxPathNumber(board);
+        System.out.println();
         System.out.println("Some basic information: ");
+        System.out.println();
         System.out.println("There are " + maxNumber + " numbers that you need to connect" );
         System.out.println("If you want to remove path choose 0 and replace the number ");
         System.out.println("The X means that there is no path for that grid");
-        System.out.println("If you don´t know what number to put and where press H");
+        System.out.println("If you don´t know what number to put and where press H as hint");
         System.out.println("You have " + field.getHints()+ " hints left");
+        System.out.println();
+        System.out.println("The input format is: n r c (n10r5c4) ");
+        System.out.println("n = number ");
+        System.out.println("r = row ");
+        System.out.println("n = col ");
+        System.out.println();
+        System.out.println("If you want to exit the game press 'E");
+        System.out.println();
         System.out.println("Enjoy the game !");
+        System.out.println();
+        System.out.println("Press enter to start the game");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
         System.out.println("+++ The puzzle...\n");
         printBoard(board,n);
 
@@ -189,8 +204,10 @@ public class ConsoleUI {
     }
 
     public void printScores(){
+        System.out.println();
         var scores = scoreService.getTopScores("numberlink");
         System.out.println("Top Players: ");
+        System.out.println();
         System.out.println("+---------------------------------------------------------------+");
         for (int i = 0; i < scores.size(); i++){
             var score = scores.get(i);
@@ -209,8 +226,10 @@ public class ConsoleUI {
 
     }
     public void printComment(){
+        System.out.println();
         var comments = commentService.getComments("numberlink");
         System.out.println("Comments how to improve game");
+        System.out.println();
         System.out.println("+---------------------------------------------------------------+");
 
         for (int i = 0; i < comments.size(); i++){
@@ -222,24 +241,32 @@ public class ConsoleUI {
     }
 
     public void saveRating(String name){
+        int ratings = 0;
+        System.out.println();
         System.out.println("Enter what do you think about this game: ");
         Scanner scannerRating = new Scanner(System.in);
-        System.out.println("Enter rating (number)");
-        var ratings = scannerRating.nextInt();
+        do{
+            System.out.println("Enter rating (number)");
+            ratings = scannerRating.nextInt();
+        }
+        while (ratings < 0 ||ratings > 5);
+
         ratingService.setRating(
                 new Rating("numberlink",name,ratings,new Date())
         );
     }
     public void printRating(String name){
+        System.out.println();
         var rating = ratingService.getRating("numberlink",name);
+        System.out.println();
         System.out.println("+---------------------------------------------------------------+");
         System.out.println("Rating from "+name+" is: " + rating);
         System.out.println("+---------------------------------------------------------------+");
+        System.out.println();
         var Avgrating = ratingService.getAverageRating("numberlink");
         System.out.println("+---------------------------------------------------------------+");
         System.out.println("The average rating for this game is : " + Avgrating);
         System.out.println("+---------------------------------------------------------------+");
-
 
     }
 

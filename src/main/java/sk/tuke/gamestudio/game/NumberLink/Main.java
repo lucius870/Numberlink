@@ -17,11 +17,15 @@ public class Main {
     public static void main(String[] args) {
         String input;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Please first enter your name");
+        var name = scanner.nextLine();
+        int n;
         do {
-            System.out.println("Please first enter your name");
-            var name = scanner.nextLine();
-            System.out.println("Enter the size of the board");
-            int n = scanner.nextInt();
+            do {
+                System.out.println("Enter the size of the board");
+                n = scanner.nextInt();
+            }
+            while (n >15 || n<1);
 
             Grid[][] board = new Grid[n][n];
             LevelGenerator level = new LevelGenerator();

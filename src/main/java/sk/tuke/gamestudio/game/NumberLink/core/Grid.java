@@ -16,7 +16,7 @@ public  class Grid {
 
     }
 
-    private GridState state = GridState.OPEN;
+    private GridState state;
 
     public GridState getState() {
         return state;

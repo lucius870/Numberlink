@@ -1,8 +1,6 @@
 package sk.tuke.gamestudio.service;
 
 import sk.tuke.gamestudio.entity.Score;
-
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ public class ScoreServiceJDBC implements ScoreService {
 
     public static final String DELETE_COMMAND = "DELETE FROM score";
 
-    public static final String SELECT_COMMAND = "SELECT  game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 5";
+    public static final String SELECT_COMMAND = "SELECT  game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
 
     @Override
     public void addScore(Score score) {

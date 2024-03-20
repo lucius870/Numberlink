@@ -83,7 +83,7 @@ public class LevelGenerator {
 
         setUnion(board[rowA][colA], board[rowB][colB]);
         board[rowA][colA].isEndpoint = true;
-        board[rowA][rowB].setState(GridState.MARKED);
+        board[rowA][rowB].setState(GridState.OPEN);
 
         // Extend the path
         while (true) {
@@ -113,7 +113,7 @@ public class LevelGenerator {
         }
 
         board[rowB][colB].isEndpoint = true;
-        board[rowA][rowB].setState(GridState.MARKED);
+        board[rowA][rowB].setState(GridState.OPEN);
         return true;
     }
 
