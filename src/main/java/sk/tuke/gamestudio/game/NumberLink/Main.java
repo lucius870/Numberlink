@@ -1,16 +1,12 @@
 package sk.tuke.gamestudio.game.NumberLink;
 
 
-import sk.tuke.gamestudio.entity.Rating;
+
 import sk.tuke.gamestudio.game.NumberLink.consoleUI.ConsoleUI;
 import sk.tuke.gamestudio.game.NumberLink.core.Field;
 import sk.tuke.gamestudio.game.NumberLink.core.Grid;
 import sk.tuke.gamestudio.game.NumberLink.core.LevelGenerator;
-import sk.tuke.gamestudio.service.RatingService;
-import sk.tuke.gamestudio.service.RatingServiceJDBC;
 
-import java.util.Date;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {

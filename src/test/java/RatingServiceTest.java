@@ -40,13 +40,10 @@ public class RatingServiceTest {
         ratingService.setRating(new Rating("numberlink","Mimus",1,date));
         ratingService.setRating(new Rating("numberlink","Alfred",5,date));
         ratingService.setRating(new Rating("numberlink","Alfonz",4,date));
-
         assertEquals(5,ratingService.getRating("numberlink","Alfred"));
         assertEquals(4,ratingService.getRating("numberlink","Alfonz"));
         assertEquals(2,ratingService.getRating("numberlink","Lucia"));
         assertEquals(1,ratingService.getRating("numberlink","Mimus"));
-
-
     }
     @Test
     public void getAverageRating(){
@@ -60,8 +57,6 @@ public class RatingServiceTest {
         ratingService.setRating(new Rating("numberlink","Alzbeta",5,date));
         ratingService.setRating(new Rating("numberlink","Natalia",5,date));
         assertEquals(3,ratingService.getAverageRating("numberlink"));
-
-
     }
 
 

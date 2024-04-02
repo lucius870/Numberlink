@@ -5,17 +5,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
 public class ScoreServiceJDBC implements ScoreService {
     private static final String URL = "jdbc:postgresql://localhost/gamestudio";
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
 
-    public static final String INSERT_COMMAND = "INSERT INTO score (game,player, points, playedOn) VALUES (?, ?, ?, ?)";
+    public static final String INSERT_COMMAND = "INSERT INTO score (game,playedOn, player, points ) VALUES (?, ?, ?, ?)";
 
     public static final String DELETE_COMMAND = "DELETE FROM score";
 
-    public static final String SELECT_COMMAND = "SELECT  game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
+    public static final String SELECT_COMMAND = "SELECT  game,playedOn, player, points FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
 
     @Override
     public void addScore(Score score) {
@@ -23,9 +23,10 @@ public class ScoreServiceJDBC implements ScoreService {
              var statement = connection.prepareStatement(INSERT_COMMAND)) {
 
             statement.setString(1, score.getGame());
-            statement.setString(2, score.getPlayer());
-            statement.setInt(3, score.getPoints());
-            statement.setTimestamp(4, new Timestamp(score.getPlayedOn().getTime()));
+            statement.setTimestamp(2, new Timestamp(score.getPlayedOn().getTime()));
+            statement.setString(3, score.getPlayer());
+            statement.setInt(4, score.getPoints());
+
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -42,11 +43,7 @@ public class ScoreServiceJDBC implements ScoreService {
                 var scores = new ArrayList<Score>();
 
                 while (rs.next()) {
-                    scores.add(new Score(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getInt(3),
-                            rs.getTimestamp(4)));
+                    scores.add(new Score(rs.getString(1), rs.getTimestamp(2)), rs.getString(3), rs.getInt(4));
                 }
 
                 return scores;
@@ -65,5 +62,5 @@ public class ScoreServiceJDBC implements ScoreService {
             throw new ScoreException("Problem deleting scores",e);
         }
     }
-}
+}*/
 

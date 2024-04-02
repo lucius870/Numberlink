@@ -1,6 +1,8 @@
 package sk.tuke.gamestudio.game.NumberLink.consoleUI;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Rating;
 import sk.tuke.gamestudio.entity.Score;
@@ -17,10 +19,14 @@ public class ConsoleUI {
     private int rows;
     private int cols;
     private int line;
-    private final Scanner scanner = new Scanner(System.in);
-    private ScoreService scoreService = new ScoreServiceJDBC();
-    private RatingService ratingService = new RatingServiceJDBC();
-    private CommentService commentService = new CommentServiceJDBC();
+
+    @Autowired
+    private ScoreService scoreService;
+    @Autowired
+    private RatingService ratingService ;
+    @Autowired
+    private CommentService commentService ;
+
     public String RESET = "\u001B[0m";
 
     public String[] colorSet = {"\u001b[38;5;33m",
@@ -217,7 +223,7 @@ public class ConsoleUI {
     }
     public void saveScore(String name) {
         scoreService.addScore(
-                new Score( "numberlink",name, field.getScore(), new Date()));
+                new Score( "numberlink",new Date(),name, field.getScore()));
     }
     public void saveComment(String name, String input){
         commentService.addComment(

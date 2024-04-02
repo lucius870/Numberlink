@@ -1,17 +1,11 @@
 package sk.tuke.gamestudio.game.NumberLink.core;
 
-import sk.tuke.gamestudio.entity.Score;
-
 import java.util.*;
 
 public class Field {
     public Grid[][] board;
-   // Score score;
-
 
     private GameState state = GameState.PLAYING;
-    //public int gamePoints = score.getPoints();
-
 
     private int rowCount;
     private int columnCount;
