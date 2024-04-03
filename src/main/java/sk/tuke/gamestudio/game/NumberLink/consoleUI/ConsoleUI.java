@@ -258,7 +258,7 @@ public class ConsoleUI {
         while (ratings < 0 ||ratings > 5);
 
         ratingService.setRating(
-                new Rating("numberlink",name,ratings,new Date())
+                new Rating("numberlink",name,new Date(),ratings)
         );
     }
     public void printRating(String name){

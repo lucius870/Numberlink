@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+
 public class ScoreServiceJDBC implements ScoreService {
     private static final String URL = "jdbc:postgresql://localhost/gamestudio";
     private static final String USER = "postgres";
@@ -43,7 +43,7 @@ public class ScoreServiceJDBC implements ScoreService {
                 var scores = new ArrayList<Score>();
 
                 while (rs.next()) {
-                    scores.add(new Score(rs.getString(1), rs.getTimestamp(2)), rs.getString(3), rs.getInt(4));
+                    scores.add(new Score(rs.getString(1), rs.getTimestamp(2), rs.getString(3), rs.getInt(4)));
                 }
 
                 return scores;
@@ -62,5 +62,5 @@ public class ScoreServiceJDBC implements ScoreService {
             throw new ScoreException("Problem deleting scores",e);
         }
     }
-}*/
+}
 

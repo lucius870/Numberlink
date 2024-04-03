@@ -19,6 +19,8 @@ import java.util.Date;
         query = "SELECT r FROM Rating r WHERE r.game=:game AND r.player=:player ")
 @NamedQuery(name = "Rating.getAverageRating",
         query = "SELECT AVG(r.rating) FROM Rating r WHERE r.game=:game" )
+@NamedQuery(name = "Rating.setRating",
+            query = "UPDATE Rating r  SET  r.rating =: rating, r.ratedOn =:ratedOn WHERE r.game=:game AND r.player =:player")
 @NamedQuery(name = "Rating.resetRatings",
         query = "DELETE FROM Rating ")
 public class Rating {
@@ -34,7 +36,7 @@ public class Rating {
 
     private Date ratedOn;
 
-    public Rating(String game, String player, int rating, Date ratedOn) {
+    public Rating(String game, String player,Date ratedOn, int rating ) {
         this.game = game;
         this.player = player;
         this.rating = rating;

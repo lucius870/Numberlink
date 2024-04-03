@@ -24,6 +24,7 @@ create table rating
 
     game varchar(64) not null,
     player varchar(64) not null,
-    rating int not null,
-    rated_on timestamp not null
+    rated_on timestamp not null,
+    rating int not null
+
 );
