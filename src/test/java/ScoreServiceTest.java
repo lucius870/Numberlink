@@ -24,7 +24,7 @@ public class ScoreServiceTest {
         scoreService.reset();
         var date = new Date();
 
-        scoreService.addScore(new Score("numberlink", "Jaro", 100, date));
+        scoreService.addScore(new Score("numberlink",date, "Jaro", 100 ));
 
         var scores = scoreService.getTopScores("numberlink");
         assertEquals(1, scores.size());
@@ -38,10 +38,10 @@ public class ScoreServiceTest {
     public void getTopScores() {
         scoreService.reset();
         var date = new Date();
-        scoreService.addScore(new Score("numberlink", "Lucia", 100, date));
-        scoreService.addScore(new Score("numberlink", "Mima", 150, date));
-        scoreService.addScore(new Score("numberlink", "Alfred", 120, date));
-        scoreService.addScore(new Score("numberlink", "Alfonz", 180, date));
+        scoreService.addScore(new Score("numberlink", date,"Lucia", 100));
+        scoreService.addScore(new Score("numberlink", date, "Mima", 150));
+        scoreService.addScore(new Score("numberlink", date, "Alfred", 120));
+        scoreService.addScore(new Score("numberlink", date, "Alfonz", 180));
 
         var scores = scoreService.getTopScores("numberlink");
 

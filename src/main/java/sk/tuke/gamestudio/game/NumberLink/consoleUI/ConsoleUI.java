@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleUI {
+    @Autowired
     private Field field;
     private int rows;
     private int cols;
