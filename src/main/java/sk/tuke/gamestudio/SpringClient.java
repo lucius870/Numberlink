@@ -25,7 +25,7 @@ public class SpringClient {
         new SpringApplicationBuilder(SpringClient.class).web(WebApplicationType.NONE).run(args);
     }
 
-    @Bean
+   @Bean
     public CommandLineRunner runner(ConsoleUI consoleUI) {
         return args -> {
             Scanner scanner = new Scanner(System.in);
@@ -98,6 +98,23 @@ public class SpringClient {
     public ConsoleUI consoleUI(Field field) {
         return new ConsoleUI(field);
     }
+/*
+    @Bean
+    public ScoreService scoreService() {
+       return new ScoreServiceJPA();
+
+    }
+
+    @Bean
+    public CommentService commentService() {
+      return new CommentServiceJPA();
+    }
+
+    @Bean
+    public RatingService ratingService() {
+        return new RatingServiceJPA();
+    }*/
+
 
     @Bean
     public ScoreService scoreService() {
@@ -113,6 +130,7 @@ public class SpringClient {
     public RatingService ratingService() {
         return new RatingServiceRestClient();
     }
+
 
 
 

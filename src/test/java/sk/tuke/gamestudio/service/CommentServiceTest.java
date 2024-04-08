@@ -1,17 +1,27 @@
+package sk.tuke.gamestudio.service;
+
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.service.CommentService;
 import sk.tuke.gamestudio.service.CommentServiceJDBC;
+import sk.tuke.gamestudio.service.CommentServiceJPA;
 
+import javax.persistence.EntityManager;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+//@SpringBootTest
 public class CommentServiceTest {
+/*
+    @Autowired
+    public CommentService commentService;*/
 
     public CommentService commentService = new CommentServiceJDBC();
+
 
     @Test
     public void addComment(){

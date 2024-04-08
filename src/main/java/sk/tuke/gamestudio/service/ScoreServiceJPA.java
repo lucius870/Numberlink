@@ -1,5 +1,6 @@
 package sk.tuke.gamestudio.service;
 
+
 import sk.tuke.gamestudio.entity.Score;
 
 import javax.persistence.EntityManager;

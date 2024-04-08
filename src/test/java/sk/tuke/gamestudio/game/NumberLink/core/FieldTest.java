@@ -1,3 +1,5 @@
+package sk.tuke.gamestudio.game.NumberLink.core;
+
 import org.junit.jupiter.api.Test;
 import sk.tuke.gamestudio.game.NumberLink.core.Field;
 import sk.tuke.gamestudio.game.NumberLink.core.GameState;

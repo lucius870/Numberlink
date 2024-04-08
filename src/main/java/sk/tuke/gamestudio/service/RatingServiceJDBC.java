@@ -12,7 +12,7 @@ public class RatingServiceJDBC implements RatingService{
     public static final String SELECT = "SELECT  rating FROM rating WHERE game = ? AND player = ?";
     public static final String SELECT_AVG = "SELECT AVG(rating) FROM rating WHERE game = ?";
     public static final String DELETE = "DELETE FROM rating";
-    public static final String INSERT = "INSERT INTO rating (game,player,ratedOn,rating) VALUES (?, ?, ?, ?)";
+    public static final String INSERT = "INSERT INTO rating (game,player,rated_On,rating) VALUES (?, ?, ?, ?)";
     public static final String UPDATE = "UPDATE rating SET rating = ? WHERE game = ? AND player = ?";
 
     @Override
