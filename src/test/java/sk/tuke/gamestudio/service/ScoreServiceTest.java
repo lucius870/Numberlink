@@ -9,14 +9,14 @@ import sk.tuke.gamestudio.service.ScoreService;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//@SpringBootTest
+@SpringBootTest
 
 public class ScoreServiceTest {
-/*
-    @Autowired
-    public ScoreService scoreService;*/
 
-    public ScoreService scoreService = new ScoreServiceJDBC();
+    @Autowired
+    public ScoreService scoreService;
+
+    //public ScoreService scoreService = new ScoreServiceJDBC();
 
     @Test
     public void reset(){

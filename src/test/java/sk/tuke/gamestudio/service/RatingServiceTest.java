@@ -12,12 +12,12 @@ import javax.persistence.EntityManager;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//@SpringBootTest
+@SpringBootTest
 public class RatingServiceTest {
 
-    /*@Autowired
-    public RatingService ratingService;*/
-    public RatingService ratingService = new RatingServiceJDBC();
+    @Autowired
+    public RatingService ratingService;
+    //public RatingService ratingService = new RatingServiceJDBC();
 
 
     @Test

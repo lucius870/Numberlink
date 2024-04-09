@@ -14,14 +14,21 @@ public class RatingServiceJPA implements RatingService{
     private EntityManager entityManager;
     @Override
     public void setRating(Rating rating) throws RatingException {
-        int affectedRows = entityManager.createNamedQuery("Rating.setRating")
-                .setParameter("ratedOn",rating.getRatedOn())
-                .setParameter("rating",rating.getRating())
-                .setParameter("game",rating.getGame())
-                .setParameter("player",rating.getPlayer())
-                .executeUpdate();
-        if (affectedRows == 0){
-            entityManager.persist(rating);
+        if (rating.getRating() <=-1){
+            throw new RatingException("Rating cannot be negative value");
+        }
+        else if (rating.getRating() >= 6){
+            throw new RatingException("Rating cannot be higher than 5");
+        }else {
+            int affectedRows = entityManager.createNamedQuery("Rating.setRating")
+                    .setParameter("ratedOn", rating.getRatedOn())
+                    .setParameter("rating", rating.getRating())
+                    .setParameter("game", rating.getGame())
+                    .setParameter("player", rating.getPlayer())
+                    .executeUpdate();
+            if (affectedRows == 0) {
+                entityManager.persist(rating);
+            }
         }
 
     }

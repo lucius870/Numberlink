@@ -19,19 +19,26 @@ public class RatingServiceJDBC implements RatingService{
     public void setRating(Rating rating) throws RatingException {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             try (PreparedStatement updateStatement = connection.prepareStatement(UPDATE)) {
-                updateStatement.setInt(1, rating.getRating());
-                updateStatement.setString(2, rating.getGame());
-                updateStatement.setString(3, rating.getPlayer());
+                if (rating.getRating() <=-1){
+                    throw new RatingException("Rating cannot be negative value");
+                }
+                else if (rating.getRating() >= 6){
+                    throw new RatingException("Rating cannot be higher than 5");
+                }
+                else {
+                    updateStatement.setInt(1, rating.getRating());
+                    updateStatement.setString(2, rating.getGame());
+                    updateStatement.setString(3, rating.getPlayer());
 
-                int rowsAffected = updateStatement.executeUpdate();
-
-                if (rowsAffected == 0) {
-                    try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
-                        statement.setString(1, rating.getGame());
-                        statement.setString(2, rating.getPlayer());
-                        statement.setTimestamp(3, new Timestamp(rating.getRatedOn().getTime()));
-                        statement.setInt(4, rating.getRating());
-                        statement.executeUpdate();
+                    int rowsAffected = updateStatement.executeUpdate();
+                    if (rowsAffected == 0) {
+                        try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
+                            statement.setString(1, rating.getGame());
+                            statement.setString(2, rating.getPlayer());
+                            statement.setTimestamp(3, new Timestamp(rating.getRatedOn().getTime()));
+                            statement.setInt(4, rating.getRating());
+                            statement.executeUpdate();
+                        }
                     }
                 }
             }

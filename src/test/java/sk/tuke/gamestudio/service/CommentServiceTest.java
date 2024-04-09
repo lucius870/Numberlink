@@ -14,13 +14,13 @@ import javax.persistence.EntityManager;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//@SpringBootTest
+@SpringBootTest
 public class CommentServiceTest {
-/*
-    @Autowired
-    public CommentService commentService;*/
 
-    public CommentService commentService = new CommentServiceJDBC();
+    @Autowired
+    public CommentService commentService;
+
+    //public CommentService commentService = new CommentServiceJDBC();
 
 
     @Test
