@@ -3,47 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Gamestudio</title>
-   <link rel="stylesheet" href="/css/style.css"/>
+   <link rel="stylesheet" href="/css/stylesheet.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1>Numberlink</h1>
 
-<div>
-
-        <a href="/numberlink/connect" th:text='${@numberLinkController.connecting ? "Connecting" : "Change to connecting"}'></a>
-
-        <br>
-
-
-    <a href="/numberlink/hint" th:text='${@numberLinkController.hinting ? "Hinting" : "Change to hinting"}'></a>
-
-
-
-
-
+<header>
+    <h1>Numberlink game</h1>
+    <img class="img-userIcon" src="/images/userIcon.png" alt="userIcon" title="user">
+</header>
 
 </div>
 
-<div th:utext="${htmlboard}"></div>
 
-<h2>Top scores</h2>
-<table>
-    <thead>
-    <tr>
-        <th>No.</th>
-        <th>Player</th>
-        <th>Points</th>
-        <th>Played at</th>
-    </tr>
-    </thead>
-    <tr th:each="score, it : ${score}">
-        <td th:text="${it.ident + 1}" />
-        <td th:text="${score.player}"/>
-        <td th:text="${score.points}"/>
-        <td th:text="${#dates.format(score.played_on, 'dd.MM.yyyy HH:mm')}"/>
-    </tr>
-</table>
+
+
+<div class="game-container">
+
+
+    <div  class="game-item" th:utext="${htmlboard}"></div>
+
+
+
+<div class="score-item" >
+    <img class="img-throphy" src="/images/throphy.png" alt="throphy" title="throphy"><h2>Top scores</h2>
+    <table class="top-scores" >
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Played at</th>
+        </tr>
+        </thead>
+        <tr th:each="score, it : ${score}">
+            <td th:text="${it.ident + 1}" />
+            <td th:text="${score.player}"/>
+            <td th:text="${score.points}"/>
+            <td th:text="${#dates.format(score.played_on, 'dd.MM.yyyy HH:mm')}"/>
+        </tr>
+    </table>
+</div>
+
+</div>
+
+<div class="buttons">
+    <a class="connect"href="/numberlink/connect" th:text='${@numberLinkController.connecting ? "Connecting" : "Connect"}'></a>
+    <br>
+    <a class = "hint" href="/numberlink/hint" th:text='${@numberLinkController.hinting ? "Hinting" : "Hint"}'></a>
+
+</div>
 
 
 </body>

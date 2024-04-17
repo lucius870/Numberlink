@@ -25,7 +25,7 @@ import java.util.Date;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class NumberLinkController {
 
-    private int n = 8;
+    private int n = 6;
 
     private Field field;
 
@@ -35,6 +35,40 @@ public class NumberLinkController {
     private ScoreService scoreService;
     @Autowired
     private CommentService commentService;
+
+
+    public String[] colorSet = {
+            "red",
+            "blue",
+            "navy",
+            "purple",
+            "orange",
+            "darkcyan",
+            "darkorange",
+            "darkblue",
+            "darkgreen",
+            "darkmagenta",
+            "darkslateblue",
+            "deeppink",
+            "darkseagreen",
+            "darkolivegreen",
+            "darkgoldenrod",
+            "darkcyan",
+            "purple",
+            "deeppink",
+            "darkred",
+            "darkcyan",
+            "darkorange",
+            "darkkhaki",
+            "darkred",
+            "darkorange",
+            "darkkhaki",
+            "slateblue",
+            "lightgreen",
+            "darkolivegreen",
+            "darkorange",
+            "darkslateblue"
+    };
 
 
     public String numberlink(@RequestParam int row, @RequestParam int column, @RequestParam int number, Model model) {
@@ -52,8 +86,17 @@ public class NumberLinkController {
         return "numberlink";
 
     }
-    @GetMapping()
-    public String startGame(Model model){
+        @GetMapping
+        public String startGame(Model model){
+
+        if (field == null) {
+            initializeGame();
+        }
+            prepareModel(model);
+            return "numberlink";
+        }
+
+    public void initializeGame(){
         Grid[][] board = new Grid[n][n];
         LevelGenerator level = new LevelGenerator();
 
@@ -67,55 +110,47 @@ public class NumberLinkController {
 
         while (level.addPath(board, n)) ;
         level.assignPathNumbers(board, n);
-
-        prepareModel(model);
-
-        return "numberlink";
     }
 
-    public String getHtmlGrid(Grid[][]board,int n){
+    public String getHtmlGrid(Grid[][] board, int n) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<table class=\"numberlink-table\">\n");
+        sb.append("<table class='numberlink'>\n");
 
-        // Print column numbers as headers
-        sb.append("<tr>");
-        for (int colNum = 1; colNum <= n; colNum++) {
-            sb.append("<th>").append(colNum).append("</th>");
-        }
-        sb.append("</tr>\n");
-
-        // Print grid cells
         for (int i = 0; i < n; i++) {
             sb.append("<tr>");
             for (int j = 0; j < n; j++) {
-                // Print horizontal border
-                sb.append("<td>").append("</td>");
-            }
-            sb.append("</tr>");
-
-            // Print vertical border and cell contents
-            sb.append("<tr>");
-            for (int j = 0; j < n; j++) {
                 Grid cell = board[i][j];
+                sb.append("<td>");
                 if (cell.pathNumber == 0) {
-                    sb.append("<td>").append("</td>");
+                    if (i == 0 && j == 0) {
+                        sb.append("<a href='/numberlink?row=" + i + "&col = " + j + "'class ='grids' >&nbsp;");
+
+                    } else {
+                        sb.append("<span class='cross'>X</span>");
+                    }
                 } else if (!cell.isEndpoint) {
-                    sb.append("<td>").append("</td>");
+                    sb.append("<a  href='/numberlink?row=" + i + "&col = " + j + "'class ='grids' >&nbsp;");
                 } else {
-                    sb.append("<td>").append(cell.pathNumber).append("</td>");
+                    String color = getColorForNumber(cell.pathNumber);
+                    sb.append("<span style='color: ").append(color).append("'>").append(cell.pathNumber).append("</span>");
                 }
+                sb.append("</td>");
             }
             sb.append("</tr>");
         }
 
         sb.append("</table>");
-
         return sb.toString();
     }
+    private String getColorForNumber(int number) {
+        int index = (number - 1) % colorSet.length;
+        return colorSet[index];
+    }
+
     @GetMapping("/new")
     public String newGame(Model model){
-        startGame(model);
 
+        startGame(model);
         return "numberlink";
     }
 
