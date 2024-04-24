@@ -34,7 +34,6 @@ h1{
 .top-scores{
     display: flex;
     text-align: center;
-    background-color: lightgray;
     border-radius: 0.2em;
     border-style: solid;
     width: 100%;
@@ -47,6 +46,13 @@ h1{
     color: #FFFFFF;
     background-color: dimgray;
     padding: 10px;
+
+}
+.top-scores td{
+    font-weight: bold;
+    background-color: lightgray;
+    padding: 10px;
+
 
 }
 .numberlink{
@@ -118,6 +124,8 @@ a.connect{
     padding: 5px;
     position: relative;
     margin-top:70px;
+    color: black;
+    text-decoration: none;
 
 }
 a.hint{
@@ -132,6 +140,8 @@ a.hint{
     padding: 5px;
     position: relative;
     margin-top:70px;
+    color: black;
+    text-decoration: none;
 
 
 }
@@ -141,10 +151,87 @@ a.hint{
     flex-direction: row;
     align-content: center;
     justify-content: center;
-    padding-right: 15px;
+    padding-right: 130px;
 }
 a{
     margin: 10px;
+}
+
+a.newGame{
+    display: flex;
+    text-decoration: none;
+    border-radius: 0.2em;
+    font-weight: bold;
+    width: 90px;
+    height: 30px;
+    border: 1px solid darkslategrey;
+    justify-content: center;
+    padding: 5px;
+    position: relative;
+    margin-top:70px;
+    color: black;
+    text-decoration: none;
+}
+
+.comments{
+    display: flex;
+    text-align: center;
+    border-radius: 0.2em;
+    border-style: solid;
+    width: 100%;
+    justify-self: end;
+}
+
+.comments th{
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: dimgray;
+    padding: 10px;
+
+}
+.comments td{
+    font-weight: bold;
+    background-color: lightgray;
+    padding: 10px;
+
+}
+.comment-item{
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: auto auto ;
+    gap:  20px;
+
+}
+
+.rating{
+    display: flex;
+    text-align: center;
+    border-radius: 0.2em;
+    border-style: solid;
+    width: 100%;
+    justify-self: end;
+}
+
+.rating th{
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: dimgray;
+    padding: 10px;
+
+}
+.rating td{
+    font-weight: bold;
+    background-color: lightgray;
+    padding: 10px;
+
+}
+.rating-item{
+    margin-left: 80px;
+    margin-top: 10px;
 }
 
 

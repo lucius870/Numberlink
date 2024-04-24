@@ -16,6 +16,22 @@ public  class Grid {
 
     }
 
+    public int getPathNumber() {
+        return pathNumber;
+    }
+
+    public boolean isEndpoint() {
+        return isEndpoint;
+    }
+
+    public void setEndpoint(boolean endpoint) {
+        isEndpoint = endpoint;
+    }
+
+    public void setPathNumber(int pathNumber) {
+        this.pathNumber = pathNumber;
+    }
+
     private GridState state;
 
     public GridState getState() {

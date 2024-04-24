@@ -21,6 +21,10 @@ public class Field {
 
     }
 
+    public Grid[][] getBoard() {
+        return board;
+    }
+
     public int getMaxPathNumber(Grid[][]board){
         int max = 0;
         for (int row = 0; row < getRowCount(); row++){

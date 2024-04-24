@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/stylesheet.css"/>
+<header class th:fragment="header">
+    <h1>Welcome to <a href="/">Gamestudio!</a></h1>
 
-</body>
+    <!--/*@thymesVar id="userController" type="sk.tuke.gamestudio.server.controller.UserController"*/-->
+    <div th:if="${@userController.logged}">
+        Logged as: <span th:text="${@userController.loggedUser.login}"/>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div th:if="not ${@userController.logged}">
+        Not logged. Please
+        <a href="/">login</a>.
+    </div>
+</header>
+
+<footer th:fragment="footer">
+    <hr/>
+    <span>&copy; This game was developed by <a href="https://www.instagram.com/luckajackova/">TU BUDE LOGO</a></span>
+</footer>
+
+    <div th:fragment="scores(scores)" class="score-item" >
+        <img class="img-throphy" src="/images/throphy.png" alt="throphy" title="throphy"><h2>Top scores</h2>
+        <table class="top-scores" >
+            <tr>
+                <th>No.</th>
+                <th>Player</th>
+                <th>Points</th>
+                <th>Played at</th>
+            </tr>
+            <tr th:each="score, it : ${scores}">
+                <td th:text="${it.index + 1}"/>
+                <td th:text="${score.player}"/>
+                <td th:text="${score.points}"/>
+                <td th:text="${#dates.format(score.playedOn, 'dd.MM.yyyy HH:mm')}"/>
+            </tr>
+        </table>
+    </div>
+
+<div th:fragment="comments(comments)" class="comment-item" >
+    <h2>Comments</h2>
+    <table class="comments" >
+        <tr>
+            <th>No.</th>
+            <th>Player</th>
+            <th>Comment</th>
+            <th>Commented at</th>
+        </tr>
+        <tr th:each="comment, it : ${comments}">
+            <td th:text="${it.index + 1}"/>
+            <td th:text="${comment.player}"/>
+            <td th:text="${comment.comment}"/>
+            <td th:text="${#dates.format(comment.commentedOn, 'dd.MM.yyyy HH:mm')}"/>
+        </tr>
+    </table>
+</div>
+
+<!--
+<div th:fragment="PlayerRatings(PlayerRatings)" class="rating-item" >
+    <h2>Player Ratings</h2>
+    <table class="rating" >
+        <tr>
+            <th>No.</th>
+            <th>Player</th>
+            <th>Rating</th>
+            <th>Rated at</th>
+        </tr>
+        <tr th:each="rating, it : ${PlayerRatings}">
+            <td th:text="${it.index + 1}"/>
+            <td th:text="${rating.player}"/>
+            <td th:text="${rating.rating}"/>
+            <td th:text="${#dates.format(rating.ratedOn, 'dd.MM.yyyy HH:mm')}"/>
+        </tr>
+    </table>
+</div>-->
 </html>
