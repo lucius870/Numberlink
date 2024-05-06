@@ -179,7 +179,7 @@ public class NumberLinkController {
         model.addAttribute("scores",scoreService.getTopScores("numberlink"));
         model.addAttribute("comments",commentService.getComments("numberlink"));
         //model.addAttribute("PlayerRatings",ratingService.getRating("numberlink","lucia"));
-        //model.addAttribute("AverageRating",ratingService.getAverageRating("numberlink"));
+        model.addAttribute("AverageRating",ratingService.getAverageRating("numberlink"));
         model.addAttribute("htmlboard",getHtmlGrid(field.board, n));
         model.addAttribute("connecting", connecting);
         model.addAttribute("hinting", hinting);

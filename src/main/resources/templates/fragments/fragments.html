@@ -1,7 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/stylesheet.css"/>
 <header class th:fragment="header">
-    <h1>Welcome to <a href="/">Gamestudio!</a></h1>
 
     <!--/*@thymesVar id="userController" type="sk.tuke.gamestudio.server.controller.UserController"*/-->
     <div th:if="${@userController.logged}">
@@ -14,11 +13,6 @@
         <a href="/">login</a>.
     </div>
 </header>
-
-<footer th:fragment="footer">
-    <hr/>
-    <span>&copy; This game was developed by <a href="https://www.instagram.com/luckajackova/">TU BUDE LOGO</a></span>
-</footer>
 
     <div th:fragment="scores(scores)" class="score-item" >
         <img class="img-throphy" src="/images/throphy.png" alt="throphy" title="throphy"><h2>Top scores</h2>
@@ -56,8 +50,8 @@
     </table>
 </div>
 
-<!--
-<div th:fragment="PlayerRatings(PlayerRatings)" class="rating-item" >
+
+<!--<div th:fragment="AverageRating(AverageRating)" class="rating-item" >
     <h2>Player Ratings</h2>
     <table class="rating" >
         <tr>
@@ -66,7 +60,7 @@
             <th>Rating</th>
             <th>Rated at</th>
         </tr>
-        <tr th:each="rating, it : ${PlayerRatings}">
+        <tr th:each="rating, it : ${AverageRating}">
             <td th:text="${it.index + 1}"/>
             <td th:text="${rating.player}"/>
             <td th:text="${rating.rating}"/>
@@ -74,4 +68,10 @@
         </tr>
     </table>
 </div>-->
+
+
+<footer th:fragment="footer">
+    <hr/>
+    <span>&copy; This game was developed by <a href="https://www.instagram.com/luckajackova/">TU BUDE LOGO</a></span>
+</footer>
 </html>

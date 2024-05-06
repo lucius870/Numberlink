@@ -1,8 +1,49 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This project was bootstrapped with NodeJS and [Create React App](https://github.com/facebook/create-react-app).
+Please prior to start creating the project, install [NodeJS](https://nodejs.org/en/download).
+
+### `npm install -g npx`
+
+### `npx create-react-app frontend`
+
+### `cd frontend`
+
+
+
+## Installed dependencies
+
+
+### Proxy
+https://www.npmjs.com/package/http-proxy-middleware
+
+### `npm install --save http-proxy-middleware`
+
+### React router 
+https://reactrouter.com
+
+### `npm install --save react-router-dom@6`
+
+### Axios 
+https://axios-http.com/docs/intro
+
+### `npm install --save axios`
+
+### React Hook Form 
+https://react-hook-form.com
+
+### `npm install --save react-hook-form`
+
+### Internationalization framework 
+https://react.i18next.com
+
+### `npm install --save react-i18next i18next --save`
+
+
 
 ## Available Scripts
+
 
 In the project directory, you can run:
 
@@ -39,7 +80,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+
+
 ## Learn More
+
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
