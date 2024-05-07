@@ -29,14 +29,11 @@ public class Rating {
     @GeneratedValue
     private int ident;
     private String game;
-
     private String player;
-
     private int rating;
-
     private Date ratedOn;
 
-    public Rating(String game, String player,Date ratedOn, int rating ) {
+    public Rating(String game, String player, Date ratedOn, int rating) {
         this.game = game;
         this.player = player;
         this.rating = rating;
@@ -44,7 +41,5 @@ public class Rating {
     }
 
     public Rating() {
-
     }
-
 }

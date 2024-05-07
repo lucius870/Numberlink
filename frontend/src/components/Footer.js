@@ -1,10 +1,9 @@
-import React from 'react';
 
+import React from 'react';
 const Footer = () => (
     <footer>
         <hr/>
-        <span>&copy; This game was developed by  <a href="https://www.instagram.com/luckajackova/">TU BUDE LOGO</a></span>
+        <span>&copy; 2023 Gamestudio was developed at <a href="http://kpi.fei.tuke.sk">KPI FEI TUKE</a></span>
     </footer>
 )
-
 export default Footer;

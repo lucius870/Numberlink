@@ -1,7 +1,6 @@
 package sk.tuke.gamestudio.entity;
 
 public class User {
-
     private String login;
 
     public User(String login) {

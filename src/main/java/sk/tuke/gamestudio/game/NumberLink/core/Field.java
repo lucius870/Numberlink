@@ -37,13 +37,14 @@ public class Field {
 
         return max;
     }
+
     public void markPath(Grid[][]board, int row, int col, int input) {
         if (input == 0){
-            board[row-1][col-1].isEndpoint = false;
-            board[row-1][col-1].setState(GridState.OPEN);
+            board[row][col].isEndpoint = false;
+            board[row][col].setState(GridState.OPEN);
         }else{
-            board[row-1][col-1].isEndpoint = true;
-            board[row-1][col-1].setState(GridState.MARKED);
+            board[row][col].isEndpoint = true;
+            board[row][col].setState(GridState.MARKED);
         }
     }
 

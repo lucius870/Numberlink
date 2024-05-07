@@ -1,6 +1,6 @@
 package sk.tuke.gamestudio.server.controller;
 
-import org.springframework.cache.annotation.CachePut;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class UserController {
     public String login(String login, String passwd) {
         if ("heslo".equals(passwd)) {
             loggedUser = new User(login);
-            return "redirect:/mines/new";
+            return "redirect:/numberlink/grid";
         }
 
         return "redirect:/";

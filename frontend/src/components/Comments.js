@@ -1,31 +1,28 @@
 import React from 'react';
+import './stylesheet.css'
 
-const Comments = ({comments}) => {
+function Comments({comments}) {
     return (
-        <div>
-            <h2>Comments</h2>
-            <table className="comments">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Player</th>
-                    <th>Points</th>
-                    <th>Played at</th>
+        <table className="comments">
+            <thead>
+            <tr>
+                <th>Player</th>
+                <th>Comment</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {comments.map(comment => (
+                <tr key={`comment-${comment.ident}`}>
+                    <td>{comment.player}</td>
+                    <td>{comment.comment}</td>
+                    <td>{new Date(comment.commentedAt).toLocaleString()}</td>
                 </tr>
-                </thead>
-                <tbody>
-                {comments.map((comment, index) => (
-                    <tr key={comment.ident}>
-                        <td style={{textAlign: "center"}}>{index + 1}</td>
-                        <td>{comment.player}</td>
-                        <td>{comment.comment}</td>
-                        <td>{new Date(comment.commentOn).toLocaleString()}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
+            ))}
+            </tbody>
+        </table>
     );
 }
 
-export default Scores;
+export default Comments;
+

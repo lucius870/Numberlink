@@ -29,4 +29,5 @@ public class GameStudioServer {
     public CommentService commentService(){
         return new CommentServiceJPA();
     }
+
 }

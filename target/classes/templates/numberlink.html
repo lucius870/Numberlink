@@ -2,32 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout>
 <head>
     <meta charset="UTF-8">
-    <title>Gamestudio</title>
+    <title>Numberlink</title>
     <link rel="stylesheet" href="/css/stylesheet.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/icon" href="/images/icon.png">
+    <link rel="stylesheet" href="/static/css/stylesheet.css"/>
 </head>
 <body>
 <header>
     <h1>Numberlink game</h1>
-    <a href="/"> <img class="img-userIcon" src="/images/userIcon.png" alt="userIcon" title="user"></a>
 </header>
 <main class="game-container">
     <div class="game-item" th:utext="${htmlboard}"></div>
-    <div th:replace="fragments/fragments :: scores(${scores})"/>
-
+    <div class="number-item" th:utext="${getNumbers}"></div>
 </main>
     <div class="buttons">
-        <a class="connect" href="/numberlink/connect" th:text='${@numberLinkController.connecting ? "Connecting" : "Connect"}'></a>
-        <a class="hint" href="/numberlink/hint" th:text='${@numberLinkController.hinting ? "Hinting" : "Hint"}'></a>
-        <a class="newGame" href="/numberlink/new">New Game</a>
+        <a class="connect" href="/numberlink/grid/mark" th:text='${@numberLinkController.connecting ? "Marking" : "Mark"}'></a>
+        <a class="hint" href="/numberlink/grid/hint" th:text='${@numberLinkController.hinting ? "Hinting" : "Hint"}'></a>
+        <a class="newGame" href="/numberlink/grid/newGame">New Game</a>
     </div>
-<main class="stats-container">
-    <div th:replace="fragments/fragments :: comments(${comments})"/>
-   <!-- <div th:replace="fragments/fragments :: AverageRating(${AverageRating})"/>-->
-    <!--<div th:replace="fragments/fragments :: PlayerRatings(${PlayerRatings})"/>-->
-</main>
-
+<div th:if="${gameWon}" class="overlay">
+    <div class="message">
+        <p>You won!</p>
+        <form action="/numberlink/grid/newGame" method="get">
+            <button type="submit">Start Again</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
 

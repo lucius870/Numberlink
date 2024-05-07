@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout>
 <head>
     <meta charset="UTF-8">
-    <title>Gamestudio</title>
-    <link rel="stylesheet" href="/css/stylesheet.css"/>
+    <title>NumberLink</title>
+    <link rel="stylesheet" href="/static/css/stylesheet.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <!--/*@thymesVar id="NumberlinkController" type="sk.tuke.gamestudio.server.controller.NumberlinkController"*/-->
 <!-- Game field generated in java -->
-<div th:utext="${@NumberlinkController.getHtmlGrid}"/>
+    <div th:utext="${@NumberlinkController.getHtmlGrid('/numberlink/grid')}"/>
+
 </body>
 </html>

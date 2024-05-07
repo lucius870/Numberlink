@@ -28,3 +28,10 @@ create table rating
     rating int not null
 
 );
+
+create table UserEntity
+(
+    username varchar(64) not null,
+    password varchar(64) not null,
+    loggedAt timestamp not null
+);
