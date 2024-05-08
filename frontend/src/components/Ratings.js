@@ -1,16 +1,16 @@
 import React from 'react';
+import './stylesheet.css';
 const Ratings = ({ rating }) => {
     if (rating === null || rating === undefined) {
         return <div>Error: Ratings data is not available</div>;
     }
 
     return (
-        <div>
-            <h2>Average Rating</h2>
-            <div>
-                <p>Rating: {rating}</p>
+
+            <div className="rating">
+                <p className="ratingP">Rating: {rating}</p>
             </div>
-        </div>
+
     );
 };
 

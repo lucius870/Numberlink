@@ -25,10 +25,10 @@ import java.util.Set;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class NumberLinkController {
 
-    private int n = 6;
+    private int n;
 
     private Field field;
-
+    private int falseTries;
 
     public boolean connecting;
     public boolean hinting;
@@ -36,10 +36,7 @@ public class NumberLinkController {
 
     @Autowired
     private ScoreService scoreService;
-    @Autowired
-    private CommentService commentService;
-    @Autowired
-    private RatingService ratingService;
+
 
 
 
@@ -79,6 +76,10 @@ public class NumberLinkController {
             "darkslateblue"
     };
 
+    public int getFalseTries() {
+        return falseTries;
+    }
+
 
 
     @GetMapping("/grid")
@@ -105,14 +106,25 @@ public class NumberLinkController {
                 field.markPath(field.getBoard(), row, column, selectedNumber);
                 connecting = !connecting;
             }
+            else{
+                falseTries --;
+                if (falseTries<=0){
+                    model.addAttribute("gameLost", true);
+                }
+            }
         }
         else{
-            field.markPath(field.getBoard(), row, column, selectedNumber);
+            if (selectedNumber == field.board[row][column].pathNumber) {
+                field.markPath(field.getBoard(), row, column, selectedNumber);
+            }
         }
 
-        if (field.isSolved(field.board)){
-            scoreService.addScore(new Score("numberlink",new Date(),playername,field.getScore()));
+        if (field.isSolved(field.board)) {
+            if (!playername.isEmpty()){
+                scoreService.addScore(new Score("numberlink", new Date(), playername, field.getScore()));
+            }
             model.addAttribute("gameWon", true);
+
         }
         prepareModel(model);
         return "numberlink";
@@ -136,6 +148,7 @@ public class NumberLinkController {
 
         while (level.addPath(board, n)) ;
         level.assignPathNumbers(board, n);
+        falseTries = (n/2)+2;
     }
 
     public String getHtmlGrid(Grid[][] board, int n) {
@@ -156,7 +169,8 @@ public class NumberLinkController {
                     sb.append("<a  href='/numberlink/grid/mark?row=" + i + "&column=" + j + "'class ='grids' >&nbsp;");
                 } else {
                     String color = getColorForNumber(cell.pathNumber);
-                    sb.append("<span style='color: ").append(color).append("'>").append(cell.pathNumber).append("</span>");
+                    sb.append("<a href='/numberlink/grid/select?number=").append(cell.pathNumber).append("' style='color: ").append(color).append("'>");
+                    sb.append("<span class='number'>" + cell.pathNumber + "</span></a>");
                 }
                 sb.append("</td>");
 
@@ -170,35 +184,16 @@ public class NumberLinkController {
         return sb.toString();
     }
 
-
-    public String getNumbers(Field field, Grid[][] board) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<table class='numberlink'>\n");
-        Set<Integer> pathNumbers = new HashSet<>();
-        for (int i = 0; i < field.getMaxPathNumber(board); i++) {
-            for (int j = 0; j < field.getRowCount(); j++) {
-                for (int k = 0; k < field.getCollumnCount(); k++) {
-                    Grid grid = board[j][k];
-                    if (grid.pathNumber == i + 1 &&!pathNumbers.contains(grid.pathNumber)) {
-                        pathNumbers.add(grid.pathNumber);
-                        sb.append("<tr><td ><a href='/numberlink/grid/select?number=").append(grid.pathNumber).append("'class='numbers'>").append(grid.pathNumber).append("</a></td></tr>\n");
-                        break;
-                    }
-                }
-            }
-        }
-        sb.append("</table>\n");
-        return sb.toString();
-    }
-
     private String getColorForNumber(int number) {
         int index = (number - 1) % colorSet.length;
         return colorSet[index];
     }
 
     @GetMapping("/grid/new")
-    public String newGame(@RequestParam String name, Model model){
+    public String newGame(@RequestParam String name,@RequestParam int size, Model model){
         playername = name;
+        n = size;
+
         field = null;
         startGame(model);
         return "numberlink";
@@ -220,15 +215,9 @@ public class NumberLinkController {
         return "numberlink";
     }
     private void prepareModel (Model model){
-
-        model.addAttribute("htmlboard",getHtmlGrid(field.board, n));
-        model.addAttribute("getNumbers",getNumbers(field,field.board));
+        model.addAttribute("htmlboard",getHtmlGrid(field.board,n));
         model.addAttribute("connecting", connecting);
         model.addAttribute("hinting", hinting);
     }
-
-
-
-
 }
 

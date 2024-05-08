@@ -1,7 +1,8 @@
 
 import React from 'react';
+import './stylesheet.css'
 const Footer = () => (
-    <footer>
+    <footer className="fixed-bottom">
         <hr/>
         <span>&copy; 2023 Gamestudio was developed at <a href="http://kpi.fei.tuke.sk">KPI FEI TUKE</a></span>
     </footer>

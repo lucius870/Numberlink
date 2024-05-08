@@ -1,26 +1,33 @@
 import React from 'react';
 import './stylesheet.css'
+import moment from "moment";
 
 function Comments({comments}) {
     return (
-        <table className="comments">
+        <div className="body">
+        <table >
             <thead>
             <tr>
+                <th colSpan="4">Comments</th>
+            </tr>
+            <tr>
+                <th>No.</th>
                 <th>Player</th>
                 <th>Comment</th>
                 <th>Date</th>
             </tr>
-            </thead>
-            <tbody>
-            {comments.map(comment => (
-                <tr key={`comment-${comment.ident}`}>
+
+            {comments.map((comment,index) => (
+                <tr key={comment.ident}>
+                    <td style={{ textAlign: "center" }}>{index + 1}</td>
                     <td>{comment.player}</td>
                     <td>{comment.comment}</td>
-                    <td>{new Date(comment.commentedAt).toLocaleString()}</td>
+                    <td>{moment(comment.commentedAt).format("YYYY/MM/DD kk:mm:ss")}</td>
                 </tr>
             ))}
-            </tbody>
+            </thead>
         </table>
+        </div>
     );
 }
 

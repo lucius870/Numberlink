@@ -13,8 +13,8 @@
     <h1>Numberlink game</h1>
 </header>
 <main class="game-container">
+    <p class="false-tries">False tries left: <span th:text="${@numberLinkController.falseTries}"></span></p>
     <div class="game-item" th:utext="${htmlboard}"></div>
-    <div class="number-item" th:utext="${getNumbers}"></div>
 </main>
     <div class="buttons">
         <a class="connect" href="/numberlink/grid/mark" th:text='${@numberLinkController.connecting ? "Marking" : "Mark"}'></a>
@@ -26,6 +26,14 @@
         <p>You won!</p>
         <form action="/numberlink/grid/newGame" method="get">
             <button type="submit">Start Again</button>
+        </form>
+    </div>
+</div>
+<div th:if="${gameLost}" class="overlay">
+    <div class="message">
+        <p>UPS! You Lost</p>
+        <form action="/numberlink/grid/newGame" method="get">
+            <button type="submit">Try Again</button>
         </form>
     </div>
 </div>

@@ -8,16 +8,17 @@ import Scores from "./components/Scores";
 import {fetchScores} from "./_api/scoreService";
 import CommentForm from "./components/CommentForm";
 import Menu from "./components/Menu";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import NumberLinkGame from "./components/game/Numberlink/NumberLinkGame";
 import {addRating, fetchRatings} from "./_api/ratingService";
 import Ratings from "./components/Ratings";
 import RatingForm from "./components/RatingForm";
 import LoginForm from "./components/LoginForm";
+import Footer from "./components/Footer";
 
 
 const gameList = [
-    { title: 'numberlink', path: 'numberlink' },
+    { title: 'Numberlink', path: 'numberlink' },
 ];
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     const [rating, setRating] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const fetchData = () => {
         fetchScores("numberlink").then((response) =>{
@@ -63,85 +65,91 @@ function App() {
         setUsername(username);
         setPassword(password);
         setIsLoggedIn(true);
+        navigate("/");
     };
     const handleLogout = () => {
         setUsername('');
         setIsLoggedIn(false);
     };
-    const checkSolved = (username) => {
-        fetch(`/grid/solved?name=${username}`)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-    };
-
     return (
         <div>
 
             <Menu gameList={gameList} />
 
             <div className="container index-container">
+
                 <Routes>
                     <Route index element={
                         <React.Fragment>
-                            <h1>Welcome to GameStudio!</h1>
-                            {username ? <p>Hello {username}! Please select a game from the menu.</p> : <p>Please log in to continue.</p>}
+
+                                <h1 className="frontH1">Welcome to Gamestudio!</h1>
+                                {username ? <p className="mainp">Hello {username}! Please select a game from the menu.</p> : <p className="mainp">Please log in to continue.</p>}
+                            <div className="embed-responsive embed-responsive-16by9">
+                                <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/AIGnRc7F86Q" allowFullScreen></iframe>
+                            </div>
                         </React.Fragment>
                     } />
                     <Route path={"scores"} element={
                         <React.Fragment>
-                            <h1>Score</h1>
+                            <h1 className="scoreH1">Top Scores</h1>
                             <Scores scores={scores}/>
                         </React.Fragment>
                     }/>
                     <Route path="comments">
                         <Route index element={
                             <React.Fragment>
-                                <h1>Comments</h1>
+                                <h1 className="commentsH1">Comments</h1>
                                 <Comments comments={comments} />
-                                {username ? <button onClick={() => navigate("/comments/add")}>Add Comment</button> : <p>Please log in to add a comment.</p>}
+                                {username ? <button onClick={() => navigate("/comments/add")}>Add Comment</button> : <p className="mainpC">Please log in to add a comment.</p>}
                             </React.Fragment>
                         } />
                         <Route path="add" element={
                             <React.Fragment>
                                 <h2>Add comment:</h2>
-                                {username ? <CommentForm onCommentSent={handleCommentSent} /> : <p>Please log in to add a comment.</p>}
+                                {username ? <CommentForm onCommentSent={handleCommentSent} /> : <p className="mainpC">Please log in to add a comment.</p>}
                             </React.Fragment>
                         } />
                     </Route>
                     <Route path="rating">
                         <Route index element={
                             <React.Fragment>
-                                <h1>Ratings</h1>
+                                <h1 className="ratingsH1">Average Rating</h1>
                                 <Ratings rating={rating} />
-                                {username ? <button onClick={() => navigate("/rating/add")}>Add Rating</button> : <p>Please log in to add a rating.</p>}
+                                {username ? <button onClick={() => navigate("/rating/add")}>Add Rating</button> : <p className="mainpR">Please log in to add a rating.</p>}
                             </React.Fragment>
                         } />
                         <Route path="add" element={
                             <React.Fragment>
                                 <h2>Add Rating: </h2>
-                                {username ? <RatingForm onRatingSent={handleRatingSent} /> : <p>Please log in to add a rating.</p>}
+                                {username ? <RatingForm onRatingSent={handleRatingSent} /> : <p className="mainpR">Please log in to add a rating.</p>}
                             </React.Fragment>
                         } />
                     </Route>
-
                 </Routes>
-
             </div>
-
-            <div className="container index-container">
                 <Routes>
-                    <Route path="game">
-                        <Route path="numberlink" element={<NumberLinkGame playerName={username} checkSolved={checkSolved} />} />
-                    </Route>
+                    <Route path="login" element={<LoginForm onLogin={handleLogin} />} />
+                    <Route path="game/*" element={<GameLayout username={username} />} />
                 </Routes>
-            </div>
-            {!isLoggedIn && <LoginForm onLogin={handleLogin} />}
             {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+            <Footer/>
         </div>
 
     );
+
+    function GameLayout({ username }) {
+        return (
+            <div className="container index-container">
+                <Routes>
+
+                    <Route path="numberlink" element={<NumberLinkGame playerName={username} />} />
+                </Routes>
+            </div>
+        );
+    }
+
 }
+
 
 export default App;
 

@@ -1,10 +1,11 @@
 import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import {Link, NavLink} from "react-router-dom";
 import React from "react";
+import './stylesheet.css'
 
 const Menu = ({gameList}) => {
     return (
-        <Navbar bg="light" expand="lg" style={{position: "fixed", width: '100vw', top: '0', left: '0'}}>
+        <Navbar className="navbar" >
             <Container>
                 <Link className="navbar-brand" to="/">GameStudio</Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
