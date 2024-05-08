@@ -1,6 +1,8 @@
 import React from 'react';
 import './Component.css'
 import moment from "moment";
+import {formatDate} from "../_api/utils";
+import dateFormat from "dateformat";
 
 function Comments({comments}) {
     return (
@@ -22,7 +24,7 @@ function Comments({comments}) {
                     <td style={{ textAlign: "center" }}>{index + 1}</td>
                     <td>{comment.player}</td>
                     <td>{comment.comment}</td>
-                    <td>{moment(comment.commentedAt).format("YYYY/MM/DD kk:mm:ss")}</td>
+                    <td>{moment(comment.commented_on).format('MMMM Do YYYY, h:mm:ss a')}</td>
                 </tr>
             ))}
             </thead>

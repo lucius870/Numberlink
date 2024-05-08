@@ -18,11 +18,11 @@ function RatingForm({onRatingSent}) {
             <Form.Group className="rating-form" >
                 <Form.Select {...register("rating", {required: true})}>
                     <option value="">Select a rating</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value="1">&#9733;</option>
+                    <option value="2">&#9733;&#9733;</option>
+                    <option value="3">&#9733;&#9733;&#9733;</option>
+                    <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
+                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
                 </Form.Select>
                 {errors.rating && <Form.Text style={errorMessageStyle}>A rating is required</Form.Text>}
             </Form.Group>

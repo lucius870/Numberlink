@@ -29,6 +29,7 @@ public class NumberLinkController {
 
     private Field field;
     private int falseTries;
+    private int hints;
 
     public boolean connecting;
     public boolean hinting;
@@ -36,6 +37,8 @@ public class NumberLinkController {
 
     @Autowired
     private ScoreService scoreService;
+
+
 
 
 
@@ -79,8 +82,14 @@ public class NumberLinkController {
     public int getFalseTries() {
         return falseTries;
     }
+    public int getLeftHints(){
+        hints = field.getHints();
+        return hints+1;
+    }
 
-
+    public int getSelectedNumber() {
+        return selectedNumber;
+    }
 
     @GetMapping("/grid")
     public String startGame(Model model){
@@ -116,6 +125,12 @@ public class NumberLinkController {
         else{
             if (selectedNumber == field.board[row][column].pathNumber) {
                 field.markPath(field.getBoard(), row, column, selectedNumber);
+            }
+            else {
+                falseTries--;
+                if (falseTries <= 0) {
+                    model.addAttribute("gameLost", true);
+                }
             }
         }
 
@@ -193,7 +208,7 @@ public class NumberLinkController {
     public String newGame(@RequestParam String name,@RequestParam int size, Model model){
         playername = name;
         n = size;
-
+        selectedNumber=0;
         field = null;
         startGame(model);
         return "numberlink";

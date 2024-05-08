@@ -25,7 +25,8 @@ function Scores({scores}) {
                 <td style={{ textAlign: "center" }}>{index + 1}</td>
                 <td>{score.player}</td>
                 <td>{score.points}</td>
-                <td>{moment(score.playedAt).format("YYYY/MM/DD kk:mm:ss")}</td>
+                <td>{moment(score.playedAt).format('MMMM Do YYYY, h:mm:ss a')}</td>
+
             </tr>
         ))}
 
@@ -37,5 +38,7 @@ function Scores({scores}) {
 
 export default Scores;
 
-
+/*
+  <td>{new Date(comment.commented_on).toLocaleString("lookup")}</td>
+ */
 

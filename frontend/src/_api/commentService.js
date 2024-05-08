@@ -1,12 +1,16 @@
 import gsAxios from "./index";
-import {formatDate} from "./utils";
+import {format} from "date-fns";
+
 
 
 export const fetchComments = game => gsAxios.get('/comment/' + game);
 
-//post api/comment - comment
-export const addComment = (game, player, comment) => gsAxios.post('/comment', {
-    game, player, comment, commentedAt: formatDate(new Date()),
-});
-
+export const addComment = (game, player, comment, commented_on) => {
+    return gsAxios.post('/comment', {
+        game,
+        player,
+        comment,
+        commented_on,
+    });
+}
 

@@ -27,7 +27,6 @@ h1{
     position: relative;
     text-align: center;
     justify-self: center;
-    top: 60px;
 }
 .numberlink tr{
     font-weight: bold;
@@ -86,7 +85,7 @@ a.hint{
     border-radius: 5px;
     background: #009aff;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
     box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
     left: 35px;
     cursor: pointer;
@@ -102,8 +101,9 @@ a.hint{
     border-radius: 5px;
     background: #009aff;
     position: fixed;
-    bottom: 50px;
-    right: 70px;
+    bottom: 20px;
+    margin-top: 20px;
+    right: 20px;
     cursor: pointer;
     box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
     transition: transform 0.2s ease-in-out;
@@ -155,13 +155,13 @@ a.newGame{
     border-radius: 5px;
     background: #009aff;
     height: 45px;
-    width: 150px;
+    width: 400px;
     margin-top: 50px;
     box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
     align-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    margin-left: 45%;
+    margin-left: 35%;
 }
 .false-tries {
     color: white;
@@ -173,6 +173,7 @@ a.newGame{
     color: white;
     font-size: 25px;
     font-weight: bold;
+    margin-right: 10px;
 }
 .lostText{
     text-align: center;
@@ -203,6 +204,46 @@ a.newGame{
     font-size: 15px;
     font-weight: bold;
 
+}
+.Wonmessage{
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%;
+    height: 50%;
+
+}
+.WonText{
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 130px;
+    font-size: 25px;
+    font-weight: bold;
+    color:dodgerblue;
+}
+.selecting{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    background: #009aff;
+    height: 45px;
+    width: 400px;
+    margin-top: 50px;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 35%;
+
+}
+.select{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 
