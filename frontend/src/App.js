@@ -100,12 +100,12 @@ function App() {
                             <React.Fragment>
                                 <h1 className="commentsH1">Comments</h1>
                                 <Comments comments={comments} />
-                                {username ? <button onClick={() => navigate("/comments/add")}>Add Comment</button> : <p className="mainpC">Please log in to add a comment.</p>}
+                                {username ? <div className="commentFloating"><button onClick={() => navigate("/comments/add")}><p className="addComment">Add Comment</p></button></div> : <p className="mainpC">Please log in to add a comment.</p>}
                             </React.Fragment>
                         } />
                         <Route path="add" element={
                             <React.Fragment>
-                                <h2>Add comment:</h2>
+                                <h2 className="addH2">Add comment:</h2>
                                 {username ? <CommentForm onCommentSent={handleCommentSent} /> : <p className="mainpC">Please log in to add a comment.</p>}
                             </React.Fragment>
                         } />
@@ -115,12 +115,12 @@ function App() {
                             <React.Fragment>
                                 <h1 className="ratingsH1">Average Rating</h1>
                                 <Ratings rating={rating} />
-                                {username ? <button onClick={() => navigate("/rating/add")}>Add Rating</button> : <p className="mainpR">Please log in to add a rating.</p>}
+                                {username ? <div className="ratingFloating"><button onClick={() => navigate("/rating/add")}><p className="addRating"> Add Rating</p></button></div> : <p className="mainpR">Please log in to add a rating.</p>}
                             </React.Fragment>
                         } />
                         <Route path="add" element={
                             <React.Fragment>
-                                <h2>Add Rating: </h2>
+                                <h2 className="addH2">Add Rating: </h2>
                                 {username ? <RatingForm onRatingSent={handleRatingSent} /> : <p className="mainpR">Please log in to add a rating.</p>}
                             </React.Fragment>
                         } />
@@ -131,7 +131,7 @@ function App() {
                     <Route path="login" element={<LoginForm onLogin={handleLogin} />} />
                     <Route path="game/*" element={<GameLayout username={username} />} />
                 </Routes>
-            {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+            {isLoggedIn && <div className="floating-button"><button  onClick={handleLogout}><p className="logout">Logout</p></button></div>}
             <Footer/>
         </div>
 
@@ -141,7 +141,6 @@ function App() {
         return (
             <div className="container index-container">
                 <Routes>
-
                     <Route path="numberlink" element={<NumberLinkGame playerName={username} />} />
                 </Routes>
             </div>

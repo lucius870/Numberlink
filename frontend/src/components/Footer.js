@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './stylesheet.css'
+import './Component.css'
 const Footer = () => (
     <footer className="fixed-bottom">
         <hr/>

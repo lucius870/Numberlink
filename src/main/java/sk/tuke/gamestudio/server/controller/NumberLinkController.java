@@ -148,7 +148,7 @@ public class NumberLinkController {
 
         while (level.addPath(board, n)) ;
         level.assignPathNumbers(board, n);
-        falseTries = (n/2)+2;
+        falseTries = (n/2);
     }
 
     public String getHtmlGrid(Grid[][] board, int n) {

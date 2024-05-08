@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     margin: 0;
     padding: 0;
 }
@@ -98,6 +98,9 @@ table input[type="text"] {
     color: #0048ff;
 
 }
+.nav-link:active {
+    color: #0048ff;
+}
 
 .dropdown-item {
     padding: 10px;
@@ -110,6 +113,73 @@ table input[type="text"] {
 .login {
     margin-left: auto;
 }
+.fixed-bottom {
+    margin-top:calc(5% + 80px);
+}
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.login-button{
+    margin-top: 10px;
+}
+.form{
+    font-weight: bold;
+}
+.comment-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.comment{
+    font-weight: bold;
+}
+.comment-form{
+    width: 500px;
+    padding: 10px;
+}
+.sendCommentButton{
+    border-radius: 5px;
+    height: 45px;
+    width: 70px;
+    background: #009aff;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    border: #009aff;
+}
+.send{
+    color: white;
+    font-weight: bold;
+    line-height: 40px;
+}
+.sendCommentButton:hover{
+    transform: scale(1.1);
+}
+.rating-form{
+    width: 500px;
+    padding: 10px;
+}
+.rating-form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.ratingButton{
+    border-radius: 5px;
+    height: 45px;
+    width: 70px;
+    background: #009aff;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    border: #009aff;
+}
+.ratingButton:hover{
+    transform: scale(1.1);
+}
+
 
 
 

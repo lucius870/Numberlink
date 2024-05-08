@@ -1,7 +1,7 @@
 import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import {Link, NavLink} from "react-router-dom";
 import React from "react";
-import './stylesheet.css'
+import './Component.css'
 
 const Menu = ({gameList}) => {
     return (

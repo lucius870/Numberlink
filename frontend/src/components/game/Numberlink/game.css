@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.gamefield{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    color: dodgerblue;
+    left: 500px;
+}
+.size-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+
+}
+.sizes{
+    border-radius: 5px;
+    height: 45px;
+    width: 70px;
+    background: #009aff;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    border: #009aff;
+}
+.sizes:hover{
+    transform: scale(1.1);
+}
+.pSize{
+    color: white;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+
+
+
+
+
+
+
+
+

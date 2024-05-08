@@ -46,7 +46,7 @@
     font-size: 2rem;
     margin-bottom: 20px;
     height: 100%;
-    top: 150px;
+    top: 100px;
     justify-content: center;
     align-items: center;
 
@@ -57,7 +57,15 @@
     font-size: 2rem;
     margin-bottom: 20px;
     height: 100%;
-    top: 100px;
+    top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.addH2{
+    color: dodgerblue;
+    display: flex;
+    font-size: 2rem;
+    margin-top:250px;
     justify-content: center;
     align-items: center;
 }
@@ -82,10 +90,109 @@
 .mainpC{
     font-weight: bold;
     font-size: medium;
-    margin-bottom: 350px;
+    padding-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+.floating-button{
+    width: 70px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    cursor: pointer;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
+}
+.logout{
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 55px;
+    font-size: 15px;
+    font-weight: bold;
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
+}
+.floating-button:hover{
+    transform: scale(1.1);
+}
+.addComment{
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 55px;
+    font-size: 15px;
+    font-weight: bold;
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
+}
+.commentFloating:hover{
+    transform: scale(1.1);
+}
+.commentFloating{
+    width: 140px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    position: fixed;
+    bottom: 50px;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    left: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.addRating{
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 55px;
+    font-size: 15px;
+    font-weight: bold;
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
+}
+.ratingFloating:hover{
+    transform: scale(1.1);
+}
+.ratingFloating{
+    width: 140px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    position: fixed;
+    bottom: 50px;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    left: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 
 }
 

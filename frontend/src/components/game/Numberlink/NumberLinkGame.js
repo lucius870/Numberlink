@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './stylesheet.css';
+import './game.css';
 const NumberLinkGame = ({ playerName }) => {
         const [size, setSize] = useState(null);
 
@@ -12,16 +12,18 @@ const NumberLinkGame = ({ playerName }) => {
         };
 
         const renderButtons = () => (
-            <div className="size-buttons">
-                <label className="size-label" htmlFor="size-select">Choose game field size:</label>
-                <div>
-                    <button onClick={() => handleButtonClick(6)}>6x6</button>
-                    <button onClick={() => handleButtonClick(7)}>7x7</button>
-                    <button onClick={() => handleButtonClick(8)}>8x8</button>
-                    <button onClick={() => handleButtonClick(10)}>10x10</button>
-                    <button onClick={() => handleButtonClick(11)}>11x11</button>
-                    <button onClick={() => handleButtonClick(12)}>12x12</button>
-                    <button onClick={() => handleButtonClick(13)}>13x13</button>
+            <div >
+                <label className="size-label" htmlFor="size-select"></label>
+                <h1 className="gamefield">Choose game field size:</h1>
+                <div className="size-buttons">
+                    <button className="sizes" onClick={() => handleButtonClick(4)}><p className="pSize">4x4</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(5)}><p className="pSize">5x5</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(6)}><p className="pSize">6x6</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(7)}><p className="pSize">7x7</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(8)}><p className="pSize">8x8</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(10)}><p className="pSize">9x9</p></button>
+                    <button className="sizes" onClick={() => handleButtonClick(11)}><p className="pSize">10x10</p></button>
+
                 </div>
             </div>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import './stylesheet.css';
+import './Component.css';
 const Ratings = ({ rating }) => {
     if (rating === null || rating === undefined) {
         return <div>Error: Ratings data is not available</div>;

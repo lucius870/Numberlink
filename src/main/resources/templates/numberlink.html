@@ -12,14 +12,20 @@
 <header>
     <h1>Numberlink game</h1>
 </header>
+<div class="tries-container">
+    <p class="false-tries">Left tries:</p>
+    <span class="text" th:text="${@numberLinkController.falseTries}"></span>
+</div>
+
+
 <main class="game-container">
-    <p class="false-tries">False tries left: <span th:text="${@numberLinkController.falseTries}"></span></p>
     <div class="game-item" th:utext="${htmlboard}"></div>
 </main>
     <div class="buttons">
-        <a class="connect" href="/numberlink/grid/mark" th:text='${@numberLinkController.connecting ? "Marking" : "Mark"}'></a>
         <a class="hint" href="/numberlink/grid/hint" th:text='${@numberLinkController.hinting ? "Hinting" : "Hint"}'></a>
-        <a class="newGame" href="/numberlink/grid/newGame">New Game</a>
+        </div>
+    <div class="floating-button">
+        <a class="newGame" href="/numberlink/grid/newGame"><p class="gametext">New Game</p></a>
     </div>
 <div th:if="${gameWon}" class="overlay">
     <div class="message">

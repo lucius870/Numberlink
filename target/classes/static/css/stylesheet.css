@@ -1,60 +1,24 @@
 *{
-    margin: 0;
+    margin-top: 15px;
     padding: 0;
     box-sizing: border-box;
-}
-.img-throphy{
-    height: 30px;
-    width: 30px;
-    position: relative;
+    font-family: "Comic Sans MS";
 }
 header {
     height: 80px;
     width: 100%;
     background-color: dodgerblue;
-    font-family: "Comic Sans MS";
+
     position: relative;
 }
 
-.img-userIcon {
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 2;
-    background-color: transparent;
-}
 h1{
     color: white;
     left: 15px;
     top: 15px;
     position: relative;
 }
-.top-scores{
-    display: flex;
-    text-align: center;
-    border-radius: 0.2em;
-    border-style: solid;
-    width: 100%;
-    justify-self: end;
 
-
-}
-.top-scores th{
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: dimgray;
-    padding: 10px;
-
-}
-.top-scores td{
-    font-weight: bold;
-    background-color: lightgray;
-    padding: 10px;
-
-
-}
 .numberlink{
     display:flex ;
     align-items: center;
@@ -81,36 +45,14 @@ h1{
     font-size: 2.1em;
 
 }
-.cross{
-    background-repeat: no-repeat;
-    background-position: center;
-    font-weight: bold;
-    width: 1.5em;
-    height: 1.5em;
-
-}
-
 .game-container {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap:  20px;
-
+    grid-template-columns: 1fr;
 }
-.number-item{
-    margin-right: 80px;
-    margin-top: 10px;
-}
-
-.score-item{
-    margin-right: 80px;
-    margin-top: 10px;
-}
-a.numbers{
+a{
     text-decoration: none;
-    font-weight: normal;
-    color: black;
+    margin: 10px;
 }
-
 a.grids{
     border: 1px solid darkslategrey;
     display: inline-block;
@@ -120,126 +62,71 @@ a.grids{
     font-weight: normal;
     text-decoration: none;
 }
-
-a.connect{
-    display: flex;
-    text-decoration: none;
-    border-radius: 0.2em;
-    font-weight: bold;
-    width: 70px;
-    height: 30px;
-    border: 1px solid darkslategrey;
-    justify-content: center;
-    padding: 5px;
-    position: relative;
-    margin-top:70px;
-    color: black;
-
-}
 a.hint{
-    display: flex;
-    text-decoration: none;
-    border-radius: 0.2em;
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 55px;
+    font-size: 15px;
     font-weight: bold;
-    width: 70px;
-    height: 30px;
-    border: 1px solid darkslategrey;
-    justify-content: center;
-    padding: 5px;
-    position: relative;
-    margin-top:70px;
-    color: black;
-    text-decoration: none;
-
-
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
 }
 
 .buttons{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    padding-right: 130px;
+    width: 70px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    position: fixed;
+    bottom: 50px;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    left: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
-a{
-    margin: 10px;
+.buttons:hover{
+    transform: scale(1.1);
+}
+
+.floating-button{
+    width: 100px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    position: fixed;
+    bottom: 50px;
+    right: 70px;
+    cursor: pointer;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
 }
 
 a.newGame{
-    display: flex;
-    text-decoration: none;
-    border-radius: 0.2em;
-    font-weight: bold;
-    width: 90px;
-    height: 30px;
-    border: 1px solid darkslategrey;
-    justify-content: center;
-    padding: 5px;
-    position: relative;
-    margin-top:70px;
-    color: black;
-    text-decoration: none;
-}
-
-.comments{
-    display: flex;
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
-    border-radius: 0.2em;
-    border-style: solid;
-    width: 100%;
-    justify-self: end;
-}
-
-.comments th{
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
     font-weight: bold;
-    color: #FFFFFF;
-    background-color: dimgray;
-    padding: 20px;
-
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
 }
-.comments td{
-    font-weight: bold;
-    background-color: lightgray;
-    padding: 20px;
-
-}
-.comment-item{
-    margin-left: 80px;
-    margin-top: 45px;
-}
-
-.stats-container {
-    display: grid;
-    grid-template-columns: auto auto ;
-    gap:  20px;
-
-}
-
-.rating{
-    display: flex;
-    text-align: center;
-    border-radius: 0.2em;
-    border-style: solid;
-    width: 100%;
-    justify-self: end;
-}
-
-.rating th{
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: dimgray;
-    padding: 10px;
-
-}
-.rating td{
-    font-weight: bold;
-    background-color: lightgray;
-    padding: 10px;
-
-}
-.rating-item{
-    margin-left: 80px;
-    margin-top: 10px;
+.floating-button:hover{
+    transform: scale(1.1);
 }
 .overlay {
     position: fixed;
@@ -247,7 +134,7 @@ a.newGame{
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -260,6 +147,32 @@ a.newGame{
     border-radius: 5px;
     text-align: center;
 }
+.tries-container{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    background: #009aff;
+    height: 45px;
+    width: 150px;
+    margin-top: 50px;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 45%;
+}
+.false-tries {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 15px;
+}
+.text{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
 
 
 

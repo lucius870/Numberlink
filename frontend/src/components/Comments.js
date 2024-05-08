@@ -1,5 +1,5 @@
 import React from 'react';
-import './stylesheet.css'
+import './Component.css'
 import moment from "moment";
 
 function Comments({comments}) {

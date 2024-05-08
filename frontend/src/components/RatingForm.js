@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import {useNavigate} from "react-router-dom";
+import './Component.css';
 const errorMessageStyle = {color: 'red', float: 'right'};
 function RatingForm({onRatingSent}) {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -8,12 +9,13 @@ function RatingForm({onRatingSent}) {
 
     const onSubmit = data => {
         onRatingSent(data.rating);
+        navigate(-1)
     };
 
     return (
+        <div className="rating-form-container">
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group >
-                <Form.Label>Rating:</Form.Label>
+            <Form.Group className="rating-form" >
                 <Form.Select {...register("rating", {required: true})}>
                     <option value="">Select a rating</option>
                     <option value="1">1</option>
@@ -24,11 +26,12 @@ function RatingForm({onRatingSent}) {
                 </Form.Select>
                 {errors.rating && <Form.Text style={errorMessageStyle}>A rating is required</Form.Text>}
             </Form.Group>
-            <button className="abutton" type="submit"
-                    onClick={() => navigate(-1)}>
-                Send
+            <button className="ratingButton" type="submit"
+                    disabled={!!errors.comment}>
+                <p className="send">Send</p>
             </button>
         </Form>
+        </div>
     )
 }
 
