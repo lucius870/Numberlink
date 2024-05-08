@@ -93,7 +93,7 @@ public class NumberLinkController {
 
     @GetMapping("/grid")
     public String startGame(Model model){
-
+        selectedNumber=0;
         if (field == null) {
             initializeGame();
         }
@@ -199,7 +199,10 @@ public class NumberLinkController {
         return sb.toString();
     }
 
-    private String getColorForNumber(int number) {
+    public String getColorForNumber(int number) {
+        if (number == 0) {
+            return "white";
+        }
         int index = (number - 1) % colorSet.length;
         return colorSet[index];
     }

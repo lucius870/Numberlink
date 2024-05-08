@@ -85,7 +85,7 @@ function App() {
                                 <h1 className="frontH1">Welcome to Gamestudio!</h1>
                                 {username ? <p className="mainp">Hello {username}! Please select a game from the menu.</p> : <p className="mainp">Please log in to continue.</p>}
                             <div className="video-container">
-                                <iframe className="video" src="https://www.youtube.com/embed/U3VaXchMJBs" allowFullScreen></iframe>
+                                <iframe className="video" src="https://www.youtube.com/embed/1XOdGDJp7SY" allowFullScreen></iframe>
                             </div>
                         </React.Fragment>
                     } />

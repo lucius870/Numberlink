@@ -17,10 +17,8 @@
     <span class="text" th:text="${@numberLinkController.falseTries}"></span>
     <p class="false-tries">Left Hints:</p>
     <span class="text" th:text="${@numberLinkController.getLeftHints}"></span>
-</div>
-<div class="selecting">
-    <p class="number">Connecting </p>
-    <span class="select" th:text="${@numberLinkController.getSelectedNumber}" ></span>
+    <p class="false-tries">Connecting: </p>
+    <span class="text" th:text="${@numberLinkController.getSelectedNumber}" th:style="'color:' + ${@numberLinkController.getColorForNumber(@numberLinkController.getSelectedNumber)}"></span>
 </div>
 
 
