@@ -134,7 +134,7 @@ a.newGame{
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.76);
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -146,6 +146,8 @@ a.newGame{
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+    width: 50%;
+    height: 50%;
 }
 .tries-container{
     display: flex;
@@ -171,6 +173,33 @@ a.newGame{
     color: white;
     font-size: 25px;
     font-weight: bold;
+}
+.lostText{
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 130px;
+    font-size: 25px;
+    font-weight: bold;
+    color:dodgerblue;
+}
+.abutton{
+    width: 100px;
+    height: 55px;
+    border-radius: 5px;
+    background: #009aff;
+    cursor: pointer;
+    border: #009aff;
+    box-shadow: 5px 8px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
+
+}
+.buttonText{
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+
 }
 
 

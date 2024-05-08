@@ -29,17 +29,17 @@
     </div>
 <div th:if="${gameWon}" class="overlay">
     <div class="message">
-        <p>You won!</p>
+        <p lass="lostText">You won!</p>
         <form action="/numberlink/grid/newGame" method="get">
-            <button type="submit">Start Again</button>
+            <button class="abutton" type="submit"><p class="buttonText">Start Again</p></button>
         </form>
     </div>
 </div>
 <div th:if="${gameLost}" class="overlay">
     <div class="message">
-        <p>UPS! You Lost</p>
+        <p class="lostText">UPS! You Lost</p>
         <form action="/numberlink/grid/newGame" method="get">
-            <button type="submit">Try Again</button>
+            <button class="abutton" type="submit"><p class="buttonText">Try Again</p></button>
         </form>
     </div>
 </div>
